@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\repartidor;
+use App\Models\Repartidor;
 use Illuminate\Http\Request;
 
 class RepartidorController extends Controller

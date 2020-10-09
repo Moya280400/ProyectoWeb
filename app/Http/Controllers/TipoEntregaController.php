@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tipo_entrega;
+use App\Models\Tipo_entrega;
 use Illuminate\Http\Request;
 
 class TipoEntregaController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tipo_vehiculo;
+use App\Models\Tipo_vehiculo;
 use Illuminate\Http\Request;
 
 class TipoVehiculoController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\marca_vehiculo;
+use App\Models\Marca_Vehiculo;
 use Illuminate\Http\Request;
 
 class MarcaVehiculoController extends Controller

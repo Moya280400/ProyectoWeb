@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\plataforma;
+use App\Models\Plataforma;
 use Illuminate\Http\Request;
 
 class PlataformaController extends Controller
