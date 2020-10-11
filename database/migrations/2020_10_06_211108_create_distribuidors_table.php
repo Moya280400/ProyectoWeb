@@ -15,7 +15,7 @@ class CreateDistribuidorsTable extends Migration
     {
         Schema::create('distribuidors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }

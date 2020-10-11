@@ -19,7 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('correo', 200);
             $table->string('telefono', 200);
             $table->boolean('estado')->default(true);
-
+            $table->timestamps();
             $table->primary('id');
         });
     }

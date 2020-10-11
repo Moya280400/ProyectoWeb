@@ -18,6 +18,7 @@ class CreateUsuariosTable extends Migration
             $table->string('nombre', 200);
             $table->string('correo', 200);
             $table->string('telefono', 200);
+            $table->string('contrasenna', 200);
             $table->boolean('estado')->default(true);
             $table->unsignedInteger('rol_id');
             $table->timestamps();
