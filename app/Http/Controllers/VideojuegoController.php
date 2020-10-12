@@ -12,9 +12,28 @@ class VideojuegoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getVideojuegoAdmin()
     {
-        //
+        try {
+            $videojuegos=Videojuego::orderBy('nombre', 'asc')->with(['generos', 'plataformas'])->get();
+            $response=$videojuegos;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
+
+    }
+
+    public function getVideojuegoActivo()
+    {
+        try {
+            $videojuegos=Videojuego::where('estado', 1)->with(['generos', 'plataformas'])->orderBy('nombre', 'asc')->get();
+            $response=$videojuegos;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
+
     }
 
     /**
@@ -39,14 +58,23 @@ class VideojuegoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Busca el videojuego por nombre.
      *
      * @param  \App\Models\videojuego  $videojuego
      * @return \Illuminate\Http\Response
      */
-    public function show(videojuego $videojuego)
+    public function getJuegoPorNombre($nombre)
     {
-        //
+        //where('name', 'like', 'T%')
+        //'%' . Input::get('name') . '%'
+        try {
+            //Obtener un videojuego
+            $videojuegos = Videojuego::where('nombre', 'like', '%' . $nombre . '%')->with(['plataformas', 'generos'])->get();
+            $response = $videojuegos;
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**

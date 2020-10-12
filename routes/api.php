@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\VideojuegoController;
+use App\Models\Videojuego;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,9 +14,18 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 
-| Esto es un comentario para conseguir la play 5 :v aa
+|
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'proyectowb'], function () {
+    Route::group(['prefix' => 'videojuego'], function () {
+
+
+        //API Videojuegos//
+        Route::get('', [VideojuegoController::class,'getVideojuegoAdmin']);
+        Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
+        Route::get('/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
+
+        //
+    });
 });
