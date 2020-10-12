@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
-
+    Perdedor de la playstation 5
 |
 */
 
@@ -22,7 +22,7 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
 
         //API Videojuegos//
-        Route::get('', [VideojuegoController::class,'getVideojuegoAdmin']);
+        Route::get('', [VideojuegoController::class, 'getVideojuegoAdmin']);
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
         Route::get('/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
 
