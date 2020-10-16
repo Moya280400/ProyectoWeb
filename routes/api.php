@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolController;
 use App\Http\Controllers\VideojuegoController;
 use App\Models\Videojuego;
 use Illuminate\Http\Request;
@@ -26,6 +27,11 @@ Route::group(['prefix' => 'proyectowb'], function () {
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
         Route::get('/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
 
+        //
+    });
+    Route::group(['prefix' => 'rol'], function () {
+        //API Roles//
+        Route::get('', [RolController::class, 'index']);
         //
     });
 });

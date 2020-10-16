@@ -14,7 +14,13 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Rol=Rol::all();
+            $response=$Rol;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -46,7 +52,7 @@ class RolController extends Controller
      */
     public function show(rol $rol)
     {
-        //
+
     }
 
     /**
