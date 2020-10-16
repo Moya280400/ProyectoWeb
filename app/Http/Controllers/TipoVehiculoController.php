@@ -14,7 +14,13 @@ class TipoVehiculoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Tipo_vehiculo=Tipo_vehiculo::all();
+            $response=$Tipo_vehiculo;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class TipoVehiculoController extends Controller
      * @param  \App\Models\tipo_vehiculo  $tipo_vehiculo
      * @return \Illuminate\Http\Response
      */
-    public function show(tipo_vehiculo $tipo_vehiculo)
+    public function show($id)
     {
-        //
+        try {
+            $Tipo_vehiculo=Tipo_vehiculo::where('id',$id)->first();
+            $response=$Tipo_vehiculo;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

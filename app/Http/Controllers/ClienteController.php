@@ -14,7 +14,13 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Cliente=Cliente::all();
+            $response=$Cliente;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class ClienteController extends Controller
      * @param  \App\Models\cliente  $Cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $Cliente)
+    public function show($id)
     {
-        //
+        try {
+            $Cliente=Cliente::where('id',$id)->first();
+            $response=$Cliente;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

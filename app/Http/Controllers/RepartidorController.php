@@ -14,7 +14,13 @@ class RepartidorController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Repartidor=Repartidor::all();
+            $response=$Repartidor;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class RepartidorController extends Controller
      * @param  \App\Models\repartidor  $repartidor
      * @return \Illuminate\Http\Response
      */
-    public function show(repartidor $repartidor)
+    public function show($id)
     {
-        //
+        try {
+            $Repartidor=Repartidor::where('id',$id)->first();
+            $response=$Repartidor;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

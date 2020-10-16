@@ -14,7 +14,13 @@ class TipoEntregaController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Tipo_entrega=Tipo_entrega::all();
+            $response=$Tipo_entrega;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class TipoEntregaController extends Controller
      * @param  \App\Models\tipo_entrega  $tipo_entrega
      * @return \Illuminate\Http\Response
      */
-    public function show(tipo_entrega $tipo_entrega)
+    public function show($id)
     {
-        //
+        try {
+            $Tipo_entrega=Tipo_entrega::where('id',$id)->first();
+            $response=$Tipo_entrega;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

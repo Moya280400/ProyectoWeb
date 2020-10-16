@@ -14,7 +14,13 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Usuario=Usuario::all();
+            $response=$Usuario;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class UsuarioController extends Controller
      * @param  \App\Models\usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(usuario $usuario)
+    public function show($id)
     {
-        //
+        try {
+            $Usuario=Usuario::where('id',$id)->first();
+            $response=$Usuario;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

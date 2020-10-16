@@ -14,7 +14,13 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Vehiculo=Vehiculo::all();
+            $response=$Vehiculo;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class VehiculoController extends Controller
      * @param  \App\Models\vehiculo  $vehiculo
      * @return \Illuminate\Http\Response
      */
-    public function show(vehiculo $vehiculo)
+    public function show($id)
     {
-        //
+        try {
+            $Vehiculo=Vehiculo::where('id',$id)->first();
+            $response=$Vehiculo;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

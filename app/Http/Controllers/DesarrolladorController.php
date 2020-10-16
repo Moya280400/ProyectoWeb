@@ -14,7 +14,13 @@ class DesarrolladorController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Desarrollador=Desarrollador::all();
+            $response=$Desarrollador;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class DesarrolladorController extends Controller
      * @param  \App\Models\Desarrollador  $Desarrollador
      * @return \Illuminate\Http\Response
      */
-    public function show(Desarrollador $Desarrollador)
+    public function show($id)
     {
-        //
+        try {
+            $Desarrollador=Desarrollador::where('id',$id)->first();
+            $response=$Desarrollador;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

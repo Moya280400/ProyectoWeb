@@ -14,7 +14,13 @@ class DistribuidorController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Distribuidor=Distribuidor::all();
+            $response=$Distribuidor;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class DistribuidorController extends Controller
      * @param  \App\Models\Distribuidor  $Distribuidor
      * @return \Illuminate\Http\Response
      */
-    public function show(Distribuidor $Distribuidor)
+    public function show($id)
     {
-        //
+        try {
+            $Distribuidor=Distribuidor::where('id',$id)->first();
+            $response=$Distribuidor;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

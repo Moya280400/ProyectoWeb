@@ -14,7 +14,13 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Genero=Genero::all();
+            $response=$Genero;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class GeneroController extends Controller
      * @param  \App\Models\Genero  $Genero
      * @return \Illuminate\Http\Response
      */
-    public function show(Genero $Genero)
+    public function show($id)
     {
-        //
+        try {
+            $Genero=Genero::where('id',$id)->first();
+            $response=$Genero;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

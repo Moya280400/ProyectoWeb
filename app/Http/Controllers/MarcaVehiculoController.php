@@ -14,7 +14,13 @@ class MarcaVehiculoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Marca_Vehiculo=Marca_Vehiculo::all();
+            $response=$Marca_Vehiculo;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class MarcaVehiculoController extends Controller
      * @param  \App\Models\marca_vehiculo  $marca_vehiculo
      * @return \Illuminate\Http\Response
      */
-    public function show(marca_vehiculo $marca_vehiculo)
+    public function show($id)
     {
-        //
+        try {
+            $Marca_Vehiculo=Marca_Vehiculo::where('id',$id)->first();
+            $response=$Marca_Vehiculo;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**

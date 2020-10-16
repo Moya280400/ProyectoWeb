@@ -77,6 +77,17 @@ class VideojuegoController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        try {
+            $Videojuego=Videojuego::where('id',$id)->first();
+            $response=$Videojuego;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

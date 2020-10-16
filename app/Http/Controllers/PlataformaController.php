@@ -14,7 +14,13 @@ class PlataformaController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Plataforma=Plataforma::all();
+            $response=$Plataforma;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
@@ -44,9 +50,15 @@ class PlataformaController extends Controller
      * @param  \App\Models\plataforma  $plataforma
      * @return \Illuminate\Http\Response
      */
-    public function show(plataforma $plataforma)
+    public function show($id)
     {
-        //
+        try {
+            $Plataforma=Plataforma::where('id',$id)->first();
+            $response=$Plataforma;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
     }
 
     /**
