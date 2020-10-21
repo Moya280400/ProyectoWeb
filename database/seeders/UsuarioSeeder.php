@@ -13,15 +13,15 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
+        $objetoUsuario = \App\Models\Usuario::create([
+            'nombre' => 'Steve Rogers',
+            'email' => 'admin@gmail.com',
+            'telefono' => '86092012',
+            'estado' => '1',
+            'password' => bcrypt('123456789'),
+            'rol_id' => 1
+        ]);
+        $objetoUsuario->save();
         //Admin
-        $Usuario= new \App\Models\Usuario();
-        $Usuario->id = '123456789';
-        $Usuario->nombre = 'Steve Rogers';
-        $Usuario->correo = 'admin@gmail.com';
-        $Usuario->telefono = '86092012';
-        $Usuario->estado = 1;
-        $Usuario->contrasenna = '123456789';
-        $Usuario->rol_id = 1;
-        $Usuario->save();
     }
 }

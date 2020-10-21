@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DesarrolladorController;
 use App\Http\Controllers\DistribuidorController;
@@ -35,82 +36,113 @@ use Laravel\Passport\Http\Controllers\ClientController;
 Route::group(['prefix' => 'proyectowb'], function () {
     Route::group(['prefix' => 'videojuego'], function () {
 
-
         //API Videojuegos//
-        Route::get('', [VideojuegoController::class, 'getVideojuegoAdmin']);
+        Route::get('', [VideojuegoController::class, 'getVideojuegoAdmin'])->middleware(['auth:api', 'scopes:Administrador']);
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
         Route::get('/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
         //
+
     });
+    //Rutas auth
+    Route::group([
+        'prefix' => 'auth'
+    ], function ($router) {
+        Route::post('login', [AuthController::class, 'login']);
+        Route::post('register', [AuthController::class, 'register']);
+        Route::post('logout', [AuthController::class, 'logout']);
+    });
+    //API Roles//
     Route::group(['prefix' => 'rol'], function () {
-        //API Roles//
+
         Route::get('', [RolController::class, 'index']);
-        //
+
     });
+    //
+    //API Plataformas//
     Route::group(['prefix' => 'plataforma'], function () {
-        //API Plataformas//
+
         Route::get('', [PlataformaController::class, 'index']);
         Route::get('/{id}', [PlataformaController::class, 'show']);
-        //
+
     });
+    //
+     //API Generos//
     Route::group(['prefix' => 'genero'], function () {
-        //API Generos//
         Route::get('', [GeneroController::class, 'index']);
         Route::get('/{id}', [GeneroController::class, 'show']);
-        //
+
     });
+    //
+    //API Distribuidores//
     Route::group(['prefix' => 'distribuidor'], function () {
-        //API Distribuidores//
+
         Route::get('', [DistribuidorController::class, 'index']);
         Route::get('/{id}', [DistribuidorController::class, 'show']);
-        //
+
     });
+    //
+    //API Desarrolladores//
     Route::group(['prefix' => 'desarrollador'], function () {
-        //API Desarrolladores//
+
         Route::get('', [DesarrolladorController::class, 'index']);
         Route::get('/{id}', [DesarrolladorController::class, 'show']);
-        //
+
     });
+    //
+    //API Marca_Vehiculo//
     Route::group(['prefix' => 'marca_vehiculo'], function () {
-        //API Marca_Vehiculo//
+
         Route::get('', [MarcaVehiculoController::class, 'index']);
         Route::get('/{id}', [MarcaVehiculoController::class, 'show']);
-        //
+
     });
+     //
+     //API tipo_entrega//
     Route::group(['prefix' => 'tipo_entrega'], function () {
-        //API tipo_entrega//
+
         Route::get('', [TipoEntregaController::class, 'index']);
         Route::get('/{id}', [TipoEntregaController::class, 'show']);
-        //
+
     });
+    //
+    //API tipo_vehiculo//
     Route::group(['prefix' => 'tipo_vehiculo'], function () {
-        //API tipo_vehiculo//
+
         Route::get('', [TipoVehiculoController::class, 'index']);
         Route::get('/{id}', [TipoVehiculoController::class, 'show']);
-        //
+
     });
+    //
+    //API Vehiculo//
     Route::group(['prefix' => 'vehiculo'], function () {
-        //API Vehiculo//
+
         Route::get('', [VehiculoController::class, 'index']);
         Route::get('/{id}', [VehiculoController::class, 'show']);
-        //
+
     });
+     //
+     //API cliente//
     Route::group(['prefix' => 'cliente'], function () {
-        //API cliente//
+
         Route::get('', [ClienteController::class, 'index']);
         Route::get('/{id}', [ClienteController::class, 'show']);
-        //
+
     });
+     //
+    //API repartidor//
     Route::group(['prefix' => 'repartidor'], function () {
-        //API repartidor//
+
         Route::get('', [RepartidorController::class, 'index']);
         Route::get('/{id}', [RepartidorController::class, 'show']);
-        //
+
     });
+    //
+    //API repartidor//
     Route::group(['prefix' => 'usuario'], function () {
-        //API repartidor//
+
         Route::get('', [UsuarioController::class, 'index']);
         Route::get('/{id}', [UsuarioController::class, 'show']);
-        //
+
     });
+    //
 });

@@ -21,7 +21,7 @@ class CreateFacturasTable extends Migration
             $table->decimal('total',8,2);
             //foreing key
             $table->unsignedBigInteger('pedido_id');
-            $table->string('usuario_id',200);
+            $table->unsignedInteger('usuario_id');
 
 
 

@@ -24,7 +24,7 @@ class CreatePedidosTable extends Migration
             $table->boolean('estado')->default(true);
             //foreing key
             $table->string('cliente_id',200);
-            $table->string('usuario_id',200);
+            $table->Unsignedinteger('usuario_id');
             $table->string('repartidor_id',200);
             $table->Unsignedinteger('tipo_entrega_id');
 

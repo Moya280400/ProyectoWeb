@@ -14,16 +14,17 @@ class CreateUsuariosTable extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->string('id', 200);
+            $table->increments('id');
             $table->string('nombre', 200);
-            $table->string('correo', 200);
+            $table->string('email');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('telefono', 200);
-            $table->string('contrasenna', 200);
+            $table->string('password', 200);
+            $table->rememberToken();
             $table->boolean('estado')->default(true);
             $table->unsignedInteger('rol_id');
             $table->timestamps();
              //Foreing key
-            $table->primary('id');
             $table->foreign('rol_id')->references('id')->on('rols');
         });
     }
