@@ -44,9 +44,7 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
     });
     //Rutas auth
-    Route::group([
-        'prefix' => 'auth'
-    ], function ($router) {
+    Route::group(['prefix' => 'auth'], function ($router) {
         Route::post('login', [AuthController::class, 'login']);
         Route::post('register', [AuthController::class, 'register']);
         Route::post('logout', [AuthController::class, 'logout']);
@@ -126,6 +124,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [ClienteController::class, 'index']);
         Route::get('/{id}', [ClienteController::class, 'show']);
+        Route::post('create', [ClienteController::class, 'create']);
+
 
     });
      //

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
@@ -12,14 +13,15 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         try {
-            $Cliente=Cliente::all();
-            $response=$Cliente;
-            return response()->json($response,200);
+            $Cliente = Cliente::all();
+            $response = $Cliente;
+            return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
+            return response()->json($e->getMessage(), 200);
         }
     }
 
@@ -28,9 +30,28 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|string|max:12|min:9',
+            'nombre' => 'required|string|max:255',
+            'correo' => 'required|string|email|max:255',
+            'telefono' => 'required|string|max:8',
+            'direccion' => 'required|string|max:500',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        try {
+
+            $cliente = Cliente::create($request->toArray());
+            $response=$cliente;
+            return
+                response()->json($response, 200);
+        } catch (\Exeption $e) {
+            return response()->json($e->getMessage(), 400);
+        }
     }
 
     /**
@@ -39,6 +60,7 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         //
@@ -53,11 +75,11 @@ class ClienteController extends Controller
     public function show($id)
     {
         try {
-            $Cliente=Cliente::where('id',$id)->first();
-            $response=$Cliente;
-            return response()->json($response,200);
+            $Cliente = Cliente::where('id', $id)->first();
+            $response = $Cliente;
+            return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
+            return response()->json($e->getMessage(), 200);
         }
     }
 
