@@ -69,27 +69,27 @@ class DesarrolladorSeeder extends Seeder
         $Desarrollador->descripcion = 'Activision';
         $Desarrollador->save();
 
-        //13 Capcom
+        //12 Capcom
         $Desarrollador = new \App\Models\Desarrollador();
         $Desarrollador->descripcion = 'Capcom';
         $Desarrollador->save();
 
-        //14 Square Enix
+        //13 Square Enix
         $Desarrollador = new \App\Models\Desarrollador();
         $Desarrollador->descripcion = 'Square Enix';
         $Desarrollador->save();
 
-        //15 Bend Studio
+        //14 Bend Studio
         $Desarrollador = new \App\Models\Desarrollador();
         $Desarrollador->descripcion = 'Bend Studio';
         $Desarrollador->save();
 
-        //16 BioWare
+        //15 BioWare
         $Desarrollador = new \App\Models\Desarrollador();
         $Desarrollador->descripcion = 'BioWare';
         $Desarrollador->save();
 
-        //17 Insomniac Games
+        //16 Insomniac Games
         $Desarrollador = new \App\Models\Desarrollador();
         $Desarrollador->descripcion = 'Insomniac Games';
         $Desarrollador->save();

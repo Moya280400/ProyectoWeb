@@ -13,6 +13,7 @@ class VideoJuegoSeeder extends Seeder
      */
     public function run()
     {
+        //The Witcher
         $Videojuego = new \App\Models\Videojuego();
         $Videojuego->id='1805312949';
         $Videojuego->nombre = 'The Witcher 3: Wild Hunt - Complete Edition';
@@ -34,6 +35,10 @@ class VideoJuegoSeeder extends Seeder
 
         $Videojuego->precio= 25000 ;
 
+        $Videojuego->pathCover='https://i.ibb.co/P5Jx44B/The-Wtcher3-Cover.jpg';
+
+        $Videojuego->pathVideo='https://youtu.be/ehjJ614QfeM';
+
         $Videojuego->estado= 1 ;
 
         $Videojuego->desarrollador_id=4;
@@ -48,5 +53,40 @@ class VideoJuegoSeeder extends Seeder
          //Genero Videojuego
         $Videojuego->generos()->attach([10,11,12]);
 
+        //Spider-Man
+        //The Witcher
+        $Videojuego = new \App\Models\Videojuego();
+        $Videojuego->id='4567312949';
+        $Videojuego->nombre = "Marvel's Spider-Man: Game of the Year Edition";
+        $Videojuego->descripcion ='Una experiencia de Spider-Man completamente nueva Protagonizada por uno de los superhéroes más icónicos del mundo,
+        Spider-Man presenta las habilidades acrobáticas, la improvisación y el lanzamiento de telarañas por las que es famoso el trepamuros,
+        al tiempo que presenta elementos nunca antes vistos en un juego de Spider-Man. Desde atravesar el parkour y las interacciones ambientales únicas,
+        hasta nuevos combates y piezas cinematográficas de éxito de taquilla, Spider-Man no se parece a nadie que hayas jugado antes.
+
+        Sony Interactive Entertainment, Insomniac Games y Marvel se han unido para crear una nueva y auténtica aventura de Spider-Man.
+        Este no es el Hombre Araña que has conocido antes o visto en una película. Este es un Peter Parker experimentado que es más experto en la lucha contra el gran crimen en la ciudad de Nueva York.
+        Al mismo tiempo, está luchando por equilibrar su caótica vida personal y su carrera mientras el destino de millones de neoyorquinos descansa sobre sus hombros.';
+
+        $Videojuego->fechaSalida='2018-09-07';
+
+        $Videojuego->precio= 25000 ;
+
+        $Videojuego->pathCover='https://i.ibb.co/wyVc6m1/Marvels-Spider-Man.jpg';
+
+        $Videojuego->pathVideo='https://youtu.be/8pR0o2fGyHg';
+
+        $Videojuego->estado= 1 ;
+
+        $Videojuego->desarrollador_id=16;
+
+        $Videojuego->distribuidor_id=4;
+
+        $Videojuego->save();
+
+        //Plataforma Videojuego
+        $Videojuego->plataformas()->attach([5, 6]);
+
+         //Genero Videojuego
+        $Videojuego->generos()->attach([12,1]);
     }
 }

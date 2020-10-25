@@ -19,6 +19,8 @@ class CreateVideojuegosTable extends Migration
             $table->text('descripcion');
             $table->date('fechaSalida');
             $table->decimal('precio', 8, 2);
+            $table->text('pathCover');
+            $table->text('pathVideo');
             $table->boolean('estado')->default(true);
             //Asociar con un desarrolador
             $table->unsignedInteger('desarrollador_id');
