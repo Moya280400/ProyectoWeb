@@ -20,7 +20,6 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:usuarios',
             'telefono' => 'required|string|numeric|min:8',
             'password' => 'required|string|min:6',
-            'estado' => 'required|bool|min:1',
             'rol_id' => 'required',
         ]);
         //Retornar mensajes de validación
