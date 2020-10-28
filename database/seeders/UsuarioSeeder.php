@@ -13,6 +13,7 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
+        //Admin 1
         $objetoUsuario = \App\Models\Usuario::create([
             'nombre' => 'Steve Rogers',
             'email' => 'admin@gmail.com',
@@ -22,6 +23,50 @@ class UsuarioSeeder extends Seeder
             'rol_id' => 1
         ]);
         $objetoUsuario->save();
-        //Admin
+
+        //Vendedor 2
+        $objetoUsuario = \App\Models\Usuario::create([
+            'nombre' => 'Peter Parker',
+            'email' => 'peterparker@gmail.com',
+            'telefono' => '86675665',
+            'estado' => '1',
+            'password' => bcrypt('123456789'),
+            'rol_id' => 2
+        ]);
+        $objetoUsuario->save();
+
+        //Vendedor 3
+        $objetoUsuario = \App\Models\Usuario::create([
+            'nombre' => 'Bruce Wayne',
+            'email' => 'imbatman@gmail.com',
+            'telefono' => '86093572',
+            'estado' => '1',
+            'password' => bcrypt('123456789'),
+            'rol_id' => 2
+        ]);
+        $objetoUsuario->save();
+
+        //Vendedor 4
+        $objetoUsuario = \App\Models\Usuario::create([
+            'nombre' => 'Clark Kent',
+            'email' => 'clarkkent@gmail.com',
+            'telefono' => '87788909',
+            'estado' => '1',
+            'password' => bcrypt('123456789'),
+            'rol_id' => 2
+        ]);
+        $objetoUsuario->save();
+
+        //Vendedor 5
+        $objetoUsuario = \App\Models\Usuario::create([
+            'nombre' => 'Nick Fury ',
+            'email' => 'nickfury@gmail.com',
+            'telefono' => '85433765',
+            'estado' => '1',
+            'password' => bcrypt('123456789'),
+            'rol_id' => 2
+        ]);
+        $objetoUsuario->save();
+
     }
 }

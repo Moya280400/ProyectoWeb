@@ -73,7 +73,7 @@ class GeneroSeeder extends Seeder
         $Genero->descripcion = 'Un jugador';
         $Genero->save();
 
-        //12 Multijugador
+        //13 Multijugador
         $Genero = new \App\Models\Genero();
         $Genero->descripcion = 'Multijugador';
         $Genero->save();

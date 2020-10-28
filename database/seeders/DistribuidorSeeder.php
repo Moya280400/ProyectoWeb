@@ -61,7 +61,12 @@ class DistribuidorSeeder extends Seeder
 
         //10 CD Projekt RED
         $Distribuidor = new \App\Models\Distribuidor();
-        $Distribuidor->descripcion = 'CD Projekt';
+        $Distribuidor->descripcion = 'CD Projekt Red';
+        $Distribuidor->save();
+
+        //11 Bethesda Softworks
+        $Distribuidor = new \App\Models\Distribuidor();
+        $Distribuidor->descripcion = 'Bethesda Softworks';
         $Distribuidor->save();
     }
 }

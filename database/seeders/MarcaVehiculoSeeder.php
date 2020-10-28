@@ -13,18 +13,28 @@ class MarcaVehiculoSeeder extends Seeder
      */
     public function run()
     {
-        //Chevrolet
+        //1 Honda
         $MarcaVehiculo = new \App\Models\Marca_vehiculo();
-        $MarcaVehiculo->descripcion='Chevrolet';
+        $MarcaVehiculo->descripcion='Honda';
         $MarcaVehiculo->save();
-        //Land Rover
+        //2 Toyota
         $MarcaVehiculo = new \App\Models\Marca_vehiculo();
-        $MarcaVehiculo->descripcion='Land Rover';
+        $MarcaVehiculo->descripcion='Toyota';
         $MarcaVehiculo->save();
 
-        //Ferrari
+        //3 Kawasaki
         $MarcaVehiculo = new \App\Models\Marca_vehiculo();
-        $MarcaVehiculo->descripcion = 'Ferrari';
+        $MarcaVehiculo->descripcion = 'Kawasaki';
+        $MarcaVehiculo->save();
+
+        //4 Suzuki
+        $MarcaVehiculo = new \App\Models\Marca_vehiculo();
+        $MarcaVehiculo->descripcion='Suzuki';
+        $MarcaVehiculo->save();
+
+        //5 Nissan
+        $MarcaVehiculo = new \App\Models\Marca_vehiculo();
+        $MarcaVehiculo->descripcion='Nissan';
         $MarcaVehiculo->save();
     }
 }

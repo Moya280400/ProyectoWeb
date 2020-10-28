@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Http\Controllers\VideojuegoController;
+use App\Models\Cliente;
 use App\Models\Tipo_entrega;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PlataformaSeeder::class);
         $this->call(GeneroSeeder::class);
         $this->call(VideoJuegoSeeder::class);
+        $this->call(RepartidorSeeder::class);
+        $this->call(ClienteSeeder::class);
+        $this->call(PedidoSeeder::class);
 
     }
 }

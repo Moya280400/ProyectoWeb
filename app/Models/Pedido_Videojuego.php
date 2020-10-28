@@ -18,4 +18,6 @@ class Pedido_Videojuego extends Model
     {
         return $this->belongsTo('App\Models\Videojuego');
     }
+
+    protected $table = 'pedido_videojuego';
 }

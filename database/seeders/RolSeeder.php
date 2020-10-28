@@ -17,10 +17,12 @@ class RolSeeder extends Seeder
                 $Rol = new \App\Models\Rol();
                 $Rol->descripcion='Administrador';
                 $Rol->save();
+
                 //Vendedor
                 $Rol = new \App\Models\Rol();
                 $Rol->descripcion='Vendedor';
                 $Rol->save();
+
                 //Facturador
                 $Rol = new \App\Models\Rol();
                 $Rol->descripcion='Facturador';
