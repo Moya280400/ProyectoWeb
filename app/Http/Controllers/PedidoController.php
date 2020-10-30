@@ -15,11 +15,11 @@ class PedidoController extends Controller
     public function index()
     {
         try {
-            $Pedido=Pedido::orderBy('fecha', 'asc')->with(['tipo_entrega'])->get();
-            $response=$Pedido;
-            return response()->json($response,200);
+            $Pedido = Pedido::orderBy('fecha', 'asc')->with(['tipo_entrega'])->get();
+            $response = $Pedido;
+            return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
+            return response()->json($e->getMessage(), 200);
         }
     }
 
@@ -53,7 +53,7 @@ class PedidoController extends Controller
     public function show($id)
     {
         try {
-            $Pedido = Pedido::where('id', $id)->with(['cliente', 'repartidor', 'tipo_entrega'])->first();
+            $Pedido = Pedido::where('id', $id)->with(['cliente', 'usuario', 'repartidor', 'tipo_entrega', 'pedido_Videojuegos'])->first();
             $response = $Pedido;
             return response()->json($response, 200);
         } catch (\Exception $e) {

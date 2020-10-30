@@ -14,7 +14,7 @@ class Usuario extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $fillable = [
-       'nombre', 'email', 'telefono','password', 'rol_id',
+        'nombre', 'email', 'telefono', 'password', 'rol_id',
     ];
 
     protected $hidden = [
@@ -32,6 +32,11 @@ class Usuario extends Authenticatable
     }
     ///Unión con usuario_facturas
     public function facturas()
+    {
+        return $this->hasMany('App\Models\Factura');
+    }
+    ///Unión con usuario_pedidos
+    public function pedidos()
     {
         return $this->hasMany('App\Models\Factura');
     }

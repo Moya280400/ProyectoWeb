@@ -23,7 +23,7 @@ class Pedido extends Model
     {
         return $this->belongsTo('App\Models\Tipo_Entrega');
     }
-     //Unión con pedido_repartidor
+    //Unión con pedido_repartidor
     public function repartidor()
     {
         return $this->belongsTo('App\Models\Repartidor');
@@ -33,6 +33,11 @@ class Pedido extends Model
     {
         return $this->belongsTo('App\Models\Pedido');
     }
+    //Unión con pedido_Usuario
+    public function usuario()
+    {
+        return $this->belongsTo('App\Models\Usuario');
+    }
 
-//Unión con pedido_facUsuario
+    //Unión con pedido_facUsuario
 }
