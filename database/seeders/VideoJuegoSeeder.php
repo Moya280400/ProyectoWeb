@@ -37,7 +37,7 @@ class VideoJuegoSeeder extends Seeder
 
         $Videojuego->pathCover = 'https://i.ibb.co/P5Jx44B/The-Wtcher3-Cover.jpg';
 
-        $Videojuego->pathVideo = 'https://youtu.be/ehjJ614QfeM';
+        $Videojuego->pathVideo = 'https://www.youtube.com/embed/ehjJ614QfeM';
 
         $Videojuego->estado = 1;
 
@@ -57,12 +57,12 @@ class VideoJuegoSeeder extends Seeder
         $Videojuego = new \App\Models\Videojuego();
         $Videojuego->id = '4567312949';
         $Videojuego->nombre = "Marvel's Spider-Man: Game of the Year Edition";
-        $Videojuego->descripcion = 'Una experiencia de Spider-Man completamente nueva Protagonizada por uno de los superhéroes más icónicos del mundo,
-        Spider-Man presenta las habilidades acrobáticas, la improvisación y el lanzamiento de telarañas por las que es famoso el trepamuros,
-        al tiempo que presenta elementos nunca antes vistos en un juego de Spider-Man. Desde atravesar el parkour y las interacciones ambientales únicas,
-        hasta nuevos combates y piezas cinematográficas de éxito de taquilla, Spider-Man no se parece a nadie que hayas jugado antes.
+        $Videojuego->descripcion = 'Una experiencia de Spider-Man completamente nueva Protagonizada por uno de los superhéroes más icónicos del mundo,Spider-Man presenta las habilidades acrobáticas, la improvisación y el lanzamiento de telarañas por las que es famoso el trepamuros,al tiempo que presenta elementos nunca antes vistos en un juego de Spider-Man.
+
+        Desde atravesar el parkour y las interacciones ambientales únicas, hasta nuevos combates y piezas cinematográficas de éxito de taquilla, Spider-Man no se parece a nadie que hayas jugado antes.
 
         Sony Interactive Entertainment, Insomniac Games y Marvel se han unido para crear una nueva y auténtica aventura de Spider-Man.
+
         Este no es el Hombre Araña que has conocido antes o visto en una película. Este es un Peter Parker experimentado que es más experto en la lucha contra el gran crimen en la ciudad de Nueva York.
         Al mismo tiempo, está luchando por equilibrar su caótica vida personal y su carrera mientras el destino de millones de neoyorquinos descansa sobre sus hombros.';
 
@@ -72,7 +72,7 @@ class VideoJuegoSeeder extends Seeder
 
         $Videojuego->pathCover = 'https://i.ibb.co/wyVc6m1/Marvels-Spider-Man.jpg';
 
-        $Videojuego->pathVideo = 'https://youtu.be/8pR0o2fGyHg';
+        $Videojuego->pathVideo = 'https://www.youtube.com/embed/8pR0o2fGyHg';
 
         $Videojuego->estado = 1;
 
@@ -91,7 +91,7 @@ class VideoJuegoSeeder extends Seeder
         //Doom Eternal
         $Videojuego = new \App\Models\Videojuego();
         $Videojuego->id = '6667311649';
-        $Videojuego->nombre = "DOOM Etenal";
+        $Videojuego->nombre = "DOOM Eternal";
         $Videojuego->descripcion = 'Los ejércitos del infierno han invadido la Tierra. Ponte en la piel del Slayer en una épica campaña para un jugador y cruza dimensiones aniquilando demonios para detener la destrucción definitiva de la humanidad.
         No le tienen miedo a nada... salvo a ti.
 
@@ -112,7 +112,7 @@ class VideoJuegoSeeder extends Seeder
 
         $Videojuego->pathCover = 'https://i.ibb.co/Xspkyd4/doom-eternal-cover.jpg';
 
-        $Videojuego->pathVideo = 'https://youtu.be/FkklG9MA0vM';
+        $Videojuego->pathVideo = 'https://www.youtube.com/embed/FkklG9MA0vM';
 
         $Videojuego->estado = 1;
 
@@ -151,8 +151,7 @@ class VideoJuegoSeeder extends Seeder
 
         $Videojuego->pathCover = 'https://i.ibb.co/jzZvs3F/cyberpunk-2077-box-art-01-ps4-us-06jun19.jpg';
 
-        $Videojuego->pathVideo =
-            'https://www.youtube.com/watch?v=qIcTM8WXFjk&ab_channel=Cyberpunk2077';
+        $Videojuego->pathVideo = 'https://www.youtube.com/embed/qIcTM8WXFjk';
 
         $Videojuego->estado = 0;
 
@@ -184,7 +183,7 @@ class VideoJuegoSeeder extends Seeder
 
         $Videojuego->pathCover = 'https://i.ibb.co/PcjT5Bp/uncharted-4.jpg';
 
-        $Videojuego->pathVideo = 'https://youtu.be/haege34fdUw';
+        $Videojuego->pathVideo = 'https://www.youtube.com/embed/haege34fdUw';
 
         $Videojuego->estado = 1;
 

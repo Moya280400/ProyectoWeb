@@ -5,7 +5,9 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DesarrolladorController;
 use App\Http\Controllers\DistribuidorController;
 use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\ImagenVideojuegoController;
 use App\Http\Controllers\MarcaVehiculoController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PlataformaController;
 use App\Http\Controllers\RepartidorController;
 use App\Http\Controllers\RolController;
@@ -39,7 +41,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
         //API Videojuegos//
         Route::get('', [VideojuegoController::class, 'getVideojuegoAdmin'])->middleware(['auth:api', 'scopes:Administrador']);
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
-        Route::get('/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
+        Route::get('/{id}', [VideojuegoController::class, 'show']);
+        Route::get('nombre/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
         //
 
     });
@@ -137,11 +140,26 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
     });
     //
-    //API repartidor//
+    //API Usuario//
     Route::group(['prefix' => 'usuario'], function () {
 
         Route::get('', [UsuarioController::class, 'index']);
         Route::get('/{id}', [UsuarioController::class, 'show']);
+
+    });
+    //
+    //API Pedido//
+    Route::group(['prefix' => 'pedido'], function () {
+
+        Route::get('', [PedidoController::class, 'index']);
+        Route::get('/{id}', [PedidoController::class, 'show']);
+
+    });
+    //
+
+    Route::group(['prefix' => 'imagen_videojuego'], function () {
+
+        Route::get('', [ImagenVideojuegoController::class, 'index']);
 
     });
     //

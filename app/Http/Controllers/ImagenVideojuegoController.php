@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pedido;
+use App\Models\Imagen_Videojuego;
 use Illuminate\Http\Request;
 
-class PedidoController extends Controller
+class ImagenVideojuegoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        try {
-            $Pedido=Pedido::orderBy('fecha', 'asc')->with(['tipo_entrega'])->get();
-            $response=$Pedido;
-            return response()->json($response,200);
-        } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
-        }
+
     }
 
     /**
@@ -47,27 +41,21 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\pedido  $pedido
+     * @param  \App\Models\Imagen_Videojuego  $imagen_Videojuego
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Imagen_Videojuego $imagen_Videojuego)
     {
-        try {
-            $Pedido = Pedido::where('id', $id)->with(['cliente', 'repartidor', 'tipo_entrega'])->first();
-            $response = $Pedido;
-            return response()->json($response, 200);
-        } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 200);
-        }
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\pedido  $pedido
+     * @param  \App\Models\Imagen_Videojuego  $imagen_Videojuego
      * @return \Illuminate\Http\Response
      */
-    public function edit(pedido $pedido)
+    public function edit(Imagen_Videojuego $imagen_Videojuego)
     {
         //
     }
@@ -76,10 +64,10 @@ class PedidoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\pedido  $pedido
+     * @param  \App\Models\Imagen_Videojuego  $imagen_Videojuego
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pedido $pedido)
+    public function update(Request $request, Imagen_Videojuego $imagen_Videojuego)
     {
         //
     }
@@ -87,10 +75,10 @@ class PedidoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\pedido  $pedido
+     * @param  \App\Models\Imagen_Videojuego  $imagen_Videojuego
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pedido $pedido)
+    public function destroy(Imagen_Videojuego $imagen_Videojuego)
     {
         //
     }

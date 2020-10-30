@@ -14,12 +14,12 @@ class Vehiculo extends Model
         return $this->belongsTo('App\Models\Repartidor');
     }
     //Unión con vehiculo_tipoVehiculo
-    public function tipoVehiculo()
+    public function tipo_vehiculo()
     {
         return $this->belongsTo('App\Models\Tipo_Vehiculo');
     }
    //Unión con vehiculo_marcaVehiculo
-    public function marcaVehiculo()
+    public function marca_vehiculo()
     {
         return $this->belongsTo('App\Models\Marca_Vehiculo');
     }

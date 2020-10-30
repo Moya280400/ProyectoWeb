@@ -80,7 +80,7 @@ class VideojuegoController extends Controller
     public function show($id)
     {
         try {
-            $Videojuego=Videojuego::where('id',$id)->first();
+            $Videojuego=Videojuego::where('id',$id)->with(['plataformas', 'generos','distribuidor','desarrollador','imagenes_videojuego'])->first();
             $response=$Videojuego;
             return response()->json($response,200);
         } catch (\Exception $e) {

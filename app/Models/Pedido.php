@@ -19,7 +19,7 @@ class Pedido extends Model
         return $this->hasMany('App\Models\Pedido_Videojuego');
     }
     //Unión con pedido_tipo_Entrega
-    public function tipo_Entrega()
+    public function tipo_entrega()
     {
         return $this->belongsTo('App\Models\Tipo_Entrega');
     }

@@ -28,6 +28,11 @@ class Videojuego extends Model
     {
         return $this->belongsToMany('App\Models\Plataforma')->withTimestamps();
     }
+
+    public function imagenes_videojuego()
+    {
+        return $this->hasMany('App\Models\Imagen_Videojuego');
+    }
     //Unión con videojuego_pedido_videojuegos
     public function pedido_Videojuegos()
     {
