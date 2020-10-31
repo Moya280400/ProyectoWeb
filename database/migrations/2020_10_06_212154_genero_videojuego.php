@@ -17,6 +17,7 @@ class GeneroVideojuego extends Migration
             $table->increments('id');
             $table->unsignedInteger('genero_id');
             $table->unsignedBigInteger('videojuego_id');
+            
 
 
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Pedido_Videojuego;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -53,7 +54,7 @@ class PedidoController extends Controller
     public function show($id)
     {
         try {
-            $Pedido = Pedido::where('id', $id)->with(['cliente', 'usuario', 'repartidor', 'tipo_entrega', 'pedido_Videojuegos'])->first();
+            $Pedido = Pedido::where('id', $id)->with(['cliente', 'usuario', 'repartidor', 'tipo_entrega', 'pedido_Videojuegos.videojuego'])->first();
             $response = $Pedido;
             return response()->json($response, 200);
         } catch (\Exception $e) {
