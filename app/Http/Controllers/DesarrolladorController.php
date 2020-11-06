@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Desarrollador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DesarrolladorController extends Controller
 {
@@ -41,7 +42,30 @@ class DesarrolladorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'descripcion' => 'required|string|max:255',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        try {
+            $desarrollador = new Desarrollador();
+            $desarrollador->descripcion = $request->input('descripcion');
+
+            //Guardar el videojuego en la BD
+            if ($desarrollador->save()) {
+                $response = 'Desarrollador creado!';
+                return response()->json($response, 201);
+            } else {
+                $response = [
+                    'msg' => 'Error durante la creación'
+                ];
+                return response()->json($response, 404);
+            }
+        } catch (\Exeption $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -79,9 +103,31 @@ class DesarrolladorController extends Controller
      * @param  \App\Models\Desarrollador  $Desarrollador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Desarrollador $Desarrollador)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'descripcion' => 'required|string|max:255',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+
+        //Datos del videojuego
+        $desarrollador = Desarrollador::find($id);
+        $desarrollador->descripcion = $request->input('descripcion');
+
+
+        //Actualizar videojuego
+        if ($desarrollador->update()) {
+            $response = 'Desarrollador actualizado!';
+            return response()->json($response, 200);
+        }
+        $response = [
+            'msg' => 'Error durante la actualización'
+        ];
+
+        return response()->json($response, 404);
     }
 
     /**

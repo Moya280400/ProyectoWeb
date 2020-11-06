@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Repartidor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RepartidorController extends Controller
 {
@@ -41,7 +42,40 @@ class RepartidorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|string|max:12|min:9',
+            'nombre' => 'required|string|max:255',
+            'correo' => 'required|string|email|max:255',
+            'telefono' => 'required|string|max:8',
+            'vehiculo_id' => 'required|string|max:8',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        try {
+            $repartidor = new Repartidor();
+            $repartidor->id = $request->input('id');
+            $repartidor->nombre = $request->input('nombre');
+            $repartidor->correo = $request->input('correo');
+            $repartidor->telefono = $request->input('telefono');
+            $repartidor->vehiculo_id = $request->input('vehiculo_id');
+
+            $repartidor->estado = 1;
+
+            //Guardar el videojuego en la BD
+            if ($repartidor->save()) {
+                $response = 'Repartidor creado!';
+                return response()->json($response, 201);
+            } else {
+                $response = [
+                    'msg' => 'Error durante la creación'
+                ];
+                return response()->json($response, 404);
+            }
+        } catch (\Exeption $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -79,9 +113,38 @@ class RepartidorController extends Controller
      * @param  \App\Models\repartidor  $repartidor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, repartidor $repartidor)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|min:5',
+            'correo' => 'required|string|email|max:255',
+            'telefono' => 'required|string|max:8',
+            'vehiculo_id' => 'required|string|max:8',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+
+        //Datos del videojuego
+        $repartidor = Repartidor::find($id);
+        $repartidor->nombre = $request->input('nombre');
+        $repartidor->correo = $request->input('correo');
+        $repartidor->telefono = $request->input('telefono');
+        $repartidor->vehiculo_id = $request->input('vehiculo_id');
+        $repartidor->estado = $request->input('estado');
+
+
+        //Actualizar videojuego
+        if ($repartidor->update()) {
+            $response = 'Repartidor actualizado!';
+            return response()->json($response, 200);
+        }
+        $response = [
+            'msg' => 'Error durante la actualización'
+        ];
+
+        return response()->json($response, 404);
     }
 
     /**

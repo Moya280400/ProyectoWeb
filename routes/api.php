@@ -18,6 +18,7 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\VideojuegoController;
 use App\Models\Cliente;
 use App\Models\Genero;
+use App\Models\Marca_vehiculo;
 use App\Models\Videojuego;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [PlataformaController::class, 'index']);
         Route::get('/{id}', [PlataformaController::class, 'show']);
+        Route::post('store', [PlataformaController::class, 'store']);
+        Route::patch('update/{id}',[PlataformaController::class, 'update']);
 
     });
     //
@@ -71,6 +74,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
     Route::group(['prefix' => 'genero'], function () {
         Route::get('', [GeneroController::class, 'index']);
         Route::get('/{id}', [GeneroController::class, 'show']);
+        Route::post('store', [GeneroController::class, 'store']);
+        Route::patch('update/{id}', [GeneroController::class, 'update']);
 
     });
     //
@@ -79,6 +84,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [DistribuidorController::class, 'index']);
         Route::get('/{id}', [DistribuidorController::class, 'show']);
+        Route::post('store', [DistribuidorController::class, 'store']);
+        Route::patch('update/{id}',[DistribuidorController::class, 'update']);
 
     });
     //
@@ -87,6 +94,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [DesarrolladorController::class, 'index']);
         Route::get('/{id}', [DesarrolladorController::class, 'show']);
+        Route::post('store', [DesarrolladorController::class, 'store']);
+        Route::patch('update/{id}',[DesarrolladorController::class, 'update']);
 
     });
     //
@@ -95,6 +104,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [MarcaVehiculoController::class, 'index']);
         Route::get('/{id}', [MarcaVehiculoController::class, 'show']);
+        Route::post('store', [MarcaVehiculoController::class, 'store']);
+        Route::patch('update/{id}', [MarcaVehiculoController::class, 'update']);
 
     });
      //
@@ -119,6 +130,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [VehiculoController::class, 'index']);
         Route::get('/{id}', [VehiculoController::class, 'show']);
+        Route::post('store', [VehiculoController::class, 'store']);
+        Route::patch('update/{id}', [VehiculoController::class, 'update']);
 
     });
      //
@@ -127,9 +140,9 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [ClienteController::class, 'index']);
         Route::get('/{id}', [ClienteController::class, 'show']);
-        Route::post('create', [ClienteController::class, 'create']);
-
-
+        Route::post('store', [ClienteController::class, 'store']);
+        Route::patch('update/{id}',[ClienteController::class, 'update']
+        );
     });
      //
     //API repartidor//
@@ -137,7 +150,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [RepartidorController::class, 'index']);
         Route::get('/{id}', [RepartidorController::class, 'show']);
-
+        Route::post('store', [RepartidorController::class, 'store']);
+        Route::patch('update/{id}',[RepartidorController::class, 'update']);
     });
     //
     //API Usuario//

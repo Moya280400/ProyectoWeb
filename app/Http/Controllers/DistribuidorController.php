@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Distribuidor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DistribuidorController extends Controller
 {
@@ -41,7 +42,30 @@ class DistribuidorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'descripcion' => 'required|string|max:255',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        try {
+            $distribuidor = new Distribuidor();
+            $distribuidor->descripcion = $request->input('descripcion');
+
+            //Guardar el videojuego en la BD
+            if ($distribuidor->save()) {
+                $response = 'Distribuidor creado!';
+                return response()->json($response, 201);
+            } else {
+                $response = [
+                    'msg' => 'Error durante la creación'
+                ];
+                return response()->json($response, 404);
+            }
+        } catch (\Exeption $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -79,9 +103,31 @@ class DistribuidorController extends Controller
      * @param  \App\Models\Distribuidor  $Distribuidor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Distribuidor $Distribuidor)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'descripcion' => 'required|string|max:255',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+
+        //Datos del videojuego
+        $distribuidor = Distribuidor::find($id);
+        $distribuidor->descripcion = $request->input('descripcion');
+
+
+        //Actualizar videojuego
+        if ($distribuidor->update()) {
+            $response = 'Distribuidor actualizado!';
+            return response()->json($response, 200);
+        }
+        $response = [
+            'msg' => 'Error durante la actualización'
+        ];
+
+        return response()->json($response, 404);
     }
 
     /**

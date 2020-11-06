@@ -32,6 +32,17 @@ class ClienteController extends Controller
      */
     public function create(Request $request)
     {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'id' => 'required|string|max:12|min:9',
             'nombre' => 'required|string|max:255',
@@ -44,26 +55,26 @@ class ClienteController extends Controller
             return response()->json($validator->messages(), 422);
         }
         try {
+            $cliente = new Cliente();
+            $cliente->id = $request->input('id');
+            $cliente->nombre = $request->input('nombre');
+            $cliente->correo = $request->input('correo');
+            $cliente->telefono = $request->input('telefono');
+            $cliente->direccion = $request->input('direccion');
 
-            $cliente = Cliente::create($request->toArray());
-            $response=$cliente;
-            return
-                response()->json($response, 200);
+            //Guardar el videojuego en la BD
+            if ($cliente->save()) {
+                $response = 'Cliente creado!';
+                return response()->json($response, 201);
+            } else {
+                $response = [
+                    'msg' => 'Error durante la creación'
+                ];
+                return response()->json($response, 404);
+            }
         } catch (\Exeption $e) {
-            return response()->json($e->getMessage(), 400);
+            return response()->json($e->getMessage(), 422);
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -101,9 +112,38 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $Cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $Cliente)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|min:5',
+            'correo' => 'required|string|email|max:255',
+            'telefono' => 'required|string|max:8',
+            'direccion' => 'required|string|max:500',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+
+        //Datos del videojuego
+        $cliente = Cliente::find($id);
+        $cliente->nombre = $request->input('nombre');
+        $cliente->correo = $request->input('correo');
+        $cliente->telefono = $request->input('telefono');
+        $cliente->direccion = $request->input('direccion');
+        $cliente->estado = $request->input('estado');
+
+
+        //Actualizar videojuego
+        if ($cliente->update()) {
+            $response = 'Cliente actualizado!';
+            return response()->json($response, 200);
+        }
+        $response = [
+            'msg' => 'Error durante la actualización'
+        ];
+
+        return response()->json($response, 404);
     }
 
     /**

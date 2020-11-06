@@ -54,7 +54,83 @@ class VideojuegoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* Request entradas del formulario enviadas,
+            debe establecer las entradas requeridas para crear el videojuego
+         */
+        //Especificar las reglas de validación para los campos del videojuego
+        //https://laravel.com/docs/8.x/validation#available-validation-rules
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nombre' => 'required|min:3',
+                'descripcion' => 'required|min:5',
+                'fechaEstrenoInicial' => 'required|date',
+                'precio' => 'required|numeric'
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        try {
+            //Instancia
+            $vj = new Videojuego();
+            $vj->nombre = $request->input('nombre');
+            $vj->descripcion = $request->input('descripcion');
+            $vj->precio = $request->input('precio');
+            $vj->fechaEstrenoInicial
+                = Carbon::parse($request->input('fechaEstrenoInicial'))->format('Y-m-d');
+            /*
+        Asociar con un usuario
+        Relación de uno a muchos
+        https://laravel.com/docs/8.x/eloquent-relationships#updating-belongs-to-relationships
+        Existen dos opciones para realizar la asociación
+            $vj->user()->associate($user->id);
+             $vj->user_id=$user->id;
+        */
+            $user = auth('api')->user();
+            $vj->user()->associate($user->id);
+            //Información de la imagen
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $nombreImagen = time() . "foto." . $file->getClientOriginalExtension();
+                $imageUpload = Image::make($file->getRealPath());
+                $path = 'images/';
+                $imageUpload->save(public_path($path) . $nombreImagen);
+                $vj->nombreImagen = $nombreImagen;
+                $vj->pathImagen = url($path) . "/" . $nombreImagen;
+            }
+            //Guardar el videojuego en la BD
+            if ($vj->save()) {
+                /*
+            Asociarle varias generos
+            Relación de muchos a muchos
+            https://laravel.com/docs/8.x/eloquent-relationships#inserting-and-updating-related-models
+            */
+                //Solo es necesario con la imagen
+                $generos = $request->input('genero_id');
+                if (!is_array($request->input('genero_id'))) {
+                    $generos =
+                        explode(',', $request->input('genero_id'));
+                }
+                if (!is_array($request->input('genero_id'))) {
+                    $generos =
+                        explode(',', $request->input('genero_id'));
+                }
+                if (!is_null($request->input('genero_id'))) {
+
+                    $vj->generos()->attach($generos);
+                }
+                $response = 'Videojuego creado!';
+                return response()->json($response, 201);
+            } else {
+                $response = [
+                    'msg' => 'Error durante la creación'
+                ];
+                return response()->json($response, 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
