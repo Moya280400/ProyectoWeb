@@ -44,6 +44,7 @@ Route::group(['prefix' => 'proyectowb'], function () {
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
         Route::get('/{id}', [VideojuegoController::class, 'show']);
         Route::get('nombre/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
+        Route::post('store', [VideojuegoController::class, 'store']);
         //
 
     });
@@ -167,7 +168,7 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [PedidoController::class, 'index']);
         Route::get('/{id}', [PedidoController::class, 'show']);
-
+        Route::post('store', [PedidoController::class, 'store']);
     });
     //
 

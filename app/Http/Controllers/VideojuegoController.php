@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagen_Videojuego;
 use App\Models\Videojuego;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class VideojuegoController extends Controller
 {
@@ -15,25 +18,23 @@ class VideojuegoController extends Controller
     public function getVideojuegoAdmin()
     {
         try {
-            $videojuegos=Videojuego::orderBy('nombre', 'asc')->with(['generos', 'plataformas'])->get();
-            $response=$videojuegos;
-            return response()->json($response,200);
+            $videojuegos = Videojuego::orderBy('nombre', 'asc')->with(['generos', 'plataformas'])->get();
+            $response = $videojuegos;
+            return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
+            return response()->json($e->getMessage(), 200);
         }
-
     }
 
     public function getVideojuegoActivo()
     {
         try {
-            $videojuegos=Videojuego::where('estado', 1)->with(['generos', 'plataformas'])->orderBy('nombre', 'asc')->get();
-            $response=$videojuegos;
-            return response()->json($response,200);
+            $videojuegos = Videojuego::where('estado', 1)->with(['generos', 'plataformas'])->orderBy('nombre', 'asc')->get();
+            $response = $videojuegos;
+            return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
+            return response()->json($e->getMessage(), 200);
         }
-
     }
 
     /**
@@ -62,10 +63,16 @@ class VideojuegoController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nombre' => 'required|min:3',
-                'descripcion' => 'required|min:5',
-                'fechaEstrenoInicial' => 'required|date',
-                'precio' => 'required|numeric'
+                'id' => 'required|min:5',
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'required|string',
+                'fechaSalida' => 'required|date',
+                'precio' => 'required|numeric',
+                'pathCover' => 'required|string|url|max:700',
+                'pathVideo' => 'required|string|url|max:700',
+                'estado' => 'required|string',
+                'desarrollador_id' => 'required|string',
+                'distribuidor_id' => 'required|string'
             ]
         );
         if ($validator->fails()) {
@@ -74,39 +81,25 @@ class VideojuegoController extends Controller
         try {
             //Instancia
             $vj = new Videojuego();
+            $vj->id = $request->input('id');
             $vj->nombre = $request->input('nombre');
             $vj->descripcion = $request->input('descripcion');
+            $vj->fechaSalida = Carbon::parse($request->input('fechaSalida'))->format('Y-m-d');
             $vj->precio = $request->input('precio');
-            $vj->fechaEstrenoInicial
-                = Carbon::parse($request->input('fechaEstrenoInicial'))->format('Y-m-d');
-            /*
-        Asociar con un usuario
-        Relación de uno a muchos
-        https://laravel.com/docs/8.x/eloquent-relationships#updating-belongs-to-relationships
-        Existen dos opciones para realizar la asociación
-            $vj->user()->associate($user->id);
-             $vj->user_id=$user->id;
-        */
-            $user = auth('api')->user();
-            $vj->user()->associate($user->id);
-            //Información de la imagen
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $nombreImagen = time() . "foto." . $file->getClientOriginalExtension();
-                $imageUpload = Image::make($file->getRealPath());
-                $path = 'images/';
-                $imageUpload->save(public_path($path) . $nombreImagen);
-                $vj->nombreImagen = $nombreImagen;
-                $vj->pathImagen = url($path) . "/" . $nombreImagen;
-            }
+            $vj->pathCover = $request->input('pathCover');
+            $vj->pathVideo = $request->input('pathVideo');
+            $vj->estado = 1;
+            $vj->desarrollador_id = $request->input('desarrollador_id');
+            $vj->distribuidor_id = $request->input('distribuidor_id');
             //Guardar el videojuego en la BD
+
             if ($vj->save()) {
-                /*
+            /*
             Asociarle varias generos
             Relación de muchos a muchos
             https://laravel.com/docs/8.x/eloquent-relationships#inserting-and-updating-related-models
             */
-                //Solo es necesario con la imagen
+                //Generos
                 $generos = $request->input('genero_id');
                 if (!is_array($request->input('genero_id'))) {
                     $generos =
@@ -120,6 +113,43 @@ class VideojuegoController extends Controller
 
                     $vj->generos()->attach($generos);
                 }
+
+                //Plataformas
+                $plataformas = $request->input('plataforma_id');
+                if (!is_array($request->input('plataforma_id'))) {
+                    $plataformas =
+                        explode(',', $request->input('plataforma_id'));
+                }
+                if (!is_array($request->input('plataforma_id'))) {
+                    $plataformas =
+                        explode(',', $request->input('plataforma_id'));
+                }
+                if (!is_null($request->input('plataforma_id'))) {
+
+                    $vj->plataformas()->attach($plataformas);
+                }
+
+                //Imagenes
+                $images = $request->input('imagenes');
+                if (!is_array($request->input('imagenes'))) {
+                    $images =
+                        explode(',', $request->input('imagenes'));
+                }
+                if (!is_array($request->input('imagenes'))) {
+                    $images =
+                        explode(',', $request->input('imagenes'));
+                }
+                if (!is_null($request->input('imagenes'))) {
+
+                    foreach ($images as $image) {
+                        $Imagen = new Imagen_Videojuego();
+                        $Imagen->videojuego_id = $vj->id;
+
+                        $Imagen->pathImagen = $image;
+                        $Imagen->save();
+                    }
+                }
+
                 $response = 'Videojuego creado!';
                 return response()->json($response, 201);
             } else {
@@ -128,6 +158,10 @@ class VideojuegoController extends Controller
                 ];
                 return response()->json($response, 404);
             }
+
+            //$Imagenes = new Imagen_Videojuego();
+
+
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 422);
         }
@@ -156,11 +190,11 @@ class VideojuegoController extends Controller
     public function show($id)
     {
         try {
-            $Videojuego=Videojuego::where('id',$id)->with(['plataformas', 'generos','distribuidor','desarrollador','imagenes_videojuego'])->first();
-            $response=$Videojuego;
-            return response()->json($response,200);
+            $Videojuego = Videojuego::where('id', $id)->with(['plataformas', 'generos', 'distribuidor', 'desarrollador', 'imagenes_videojuego'])->first();
+            $response = $Videojuego;
+            return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(),200);
+            return response()->json($e->getMessage(), 200);
         }
     }
 
