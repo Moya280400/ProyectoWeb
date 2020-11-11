@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Pedido_Videojuego;
+use App\Models\Videojuego;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use PedidoVideojuego;
 
 class PedidoController extends Controller
 {
@@ -53,10 +55,15 @@ class PedidoController extends Controller
             $request->all(),
             [
                 'fecha' => 'required|date',
+                'direccion_entrega' => 'required|string',
+                'subtotal' => 'required|string',
+                'costo_envio' => 'required|string',
+                'impuesto' => 'required|string',
+                'total' => 'required|string',
                 'estado' => 'required|string',
                 'cliente_id' => 'required|string',
                 'usuario_id' => 'required|string',
-                'reparidor_id' => 'required|string',
+                'repartidor_id' => 'required|string',
                 'tipo_entrega_id' => 'required|string',
             ]
         );
@@ -76,7 +83,7 @@ class PedidoController extends Controller
 
             $pedido->cliente_id = $request->input('cliente_id');
             $pedido->usuario_id = $request->input('usuario_id');
-            $pedido->reparidor_id = $request->input('reparidor_id');
+            $pedido->repartidor_id = $request->input('repartidor_id');
             $pedido->tipo_entrega_id = $request->input('tipo_entrega_id');
             //Guardar el videojuego en la BD
 
@@ -87,22 +94,46 @@ class PedidoController extends Controller
             https://laravel.com/docs/8.x/eloquent-relationships#inserting-and-updating-related-models
             */
                 //Pedido_videojuego
-                $detalle = $request->input('detalle');
+                $detalleInput = $request->input('detalle');
                 if (!is_array($request->input('detalle'))) {
-                    $detalle =
+                    $detalleInput =
                         explode(',', $request->input('detalle'));
                 }
                 if (!is_array($request->input('detalle'))) {
-                    $detalle =
+                    $detalleInput =
                         explode(',', $request->input('detalle'));
                 }
                 if (!is_null($request->input('detalle'))) {
 
-                    $pedido->pedido_Videojuegos()->attach($detalle);
+                    foreach ($detalleInput as $detalleLinea) {
+
+                        if (!is_array($detalleLinea)) {
+                            $detalleLinea =
+                                explode(',', $detalleLinea);
+                        }
+
+                        if (!is_array($detalleLinea)) {
+                            $detalleLinea =
+                                explode(',', $detalleLinea);
+                        }
+
+                        //Busqueda de videojuego de la linea
+                        $videojuegoId = $detalleLinea[0];
+                        $videojuego = Videojuego::find($videojuegoId);
+
+                        //Guardar en la base
+                        $detalladoGuardar = new Pedido_Videojuego();
+                        $detalladoGuardar->pedido_id = $pedido->id;
+                        $detalladoGuardar->videojuego_id = $videojuego->id;
+                        $detalladoGuardar->cantidad = $detalleLinea[1];
+                        $detalladoGuardar->total =  $detalleLinea[2];
+                        $detalladoGuardar->save();
+                    }
                 }
 
                 $response = 'Pedido realizado!';
                 return response()->json($response, 201);
+
             } else {
                 $response = [
                     'msg' => 'Error durante la creación'
