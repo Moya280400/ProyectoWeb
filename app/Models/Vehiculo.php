@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Vehiculo extends Model
 {
     use HasFactory;
+
+    public $incrementing = false;
     //Unión con vehiculo_repartidor
     public function repartidor()
     {
