@@ -70,7 +70,6 @@ class VideojuegoController extends Controller
                 'precio' => 'required|numeric',
                 'pathCover' => 'required|string|url|max:700',
                 'pathVideo' => 'required|string|url|max:700',
-                'estado' => 'required|string',
                 'desarrollador_id' => 'required|string',
                 'distribuidor_id' => 'required|string'
             ]
