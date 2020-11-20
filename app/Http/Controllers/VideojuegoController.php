@@ -87,13 +87,22 @@ class VideojuegoController extends Controller
             $vj->precio = $request->input('precio');
             $vj->pathCover = $request->input('pathCover');
             $vj->pathVideo = $request->input('pathVideo');
-            $vj->estado = 1;
+
             $vj->desarrollador_id = $request->input('desarrollador_id');
             $vj->distribuidor_id = $request->input('distribuidor_id');
             //Guardar el videojuego en la BD
 
+
+            $date = Carbon::parse($request->input('fechaSalida'));
+            $now = Carbon::now();
+            if ($date > $now) {
+                $vj->estado = 0;
+            } else {
+                $vj->estado = 1;
+            }
+
             if ($vj->save()) {
-            /*
+                /*
             Asociarle varias generos
             Relación de muchos a muchos
             https://laravel.com/docs/8.x/eloquent-relationships#inserting-and-updating-related-models
