@@ -45,6 +45,7 @@ Route::group(['prefix' => 'proyectowb'], function () {
         Route::get('/{id}', [VideojuegoController::class, 'show']);
         Route::get('nombre/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
         Route::post('store', [VideojuegoController::class, 'store']);
+        Route::patch('update/{id}',[VideojuegoController::class, 'update']);
         //
 
     });

@@ -224,9 +224,134 @@ class VideojuegoController extends Controller
      * @param  \App\Models\videojuego  $videojuego
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, videojuego $videojuego)
+    public function update(Request $request, $id)
     {
-        //
+        /* Request entradas del formulario enviadas,
+            debe establecer las entradas requeridas para crear el videojuego
+         */
+        //Especificar las reglas de validación para los campos del videojuego
+        //https://laravel.com/docs/8.x/validation#available-validation-rules
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'required|string',
+                'fechaSalida' => 'required|date',
+                'precio' => 'required|numeric',
+                'pathCover' => 'required|string|url|max:700',
+                'pathVideo' => 'required|string|url|max:700',
+                'desarrollador_id' => 'required|string',
+                'distribuidor_id' => 'required|string'
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        try {
+            //Instancia
+            $vj = Videojuego::where('id',$id)->first();;
+            $vj->id = $request->input('id');
+            $vj->nombre = $request->input('nombre');
+            $vj->descripcion = $request->input('descripcion');
+            $vj->fechaSalida = Carbon::parse($request->input('fechaSalida'))->format('Y-m-d');
+            $vj->precio = $request->input('precio');
+            $vj->pathCover = $request->input('pathCover');
+            $vj->pathVideo = $request->input('pathVideo');
+
+            $vj->desarrollador_id = $request->input('desarrollador_id');
+            $vj->distribuidor_id = $request->input('distribuidor_id');
+            //Guardar el videojuego en la BD
+
+
+            $date = Carbon::parse($request->input('fechaSalida'));
+            $now = Carbon::now();
+            if ($date > $now) {
+                $vj->estado = 0;
+            } else {
+                $vj->estado = 1;
+            }
+
+            if ($vj->update()) {
+                /*
+            Asociarle varias generos
+            Relación de muchos a muchos
+            https://laravel.com/docs/8.x/eloquent-relationships#inserting-and-updating-related-models
+            */
+
+                //Sincronice generos
+                //Array de generos
+                $generos = $request->input('genero_id');
+                //Solo es necesario con la imagen
+                if (!is_array($request->input('genero_id'))) {
+                    //Formato array relación muchos a muchos
+                    $generos =
+                        explode(',', $request->input('genero_id'));
+                }
+                if (!is_array($request->input('genero_id'))) {
+                    //Formato array relación muchos a muchos
+                    $generos =
+                        explode(',', $request->input('genero_id'));
+                }
+                if (!is_null($request->input('genero_id'))) {
+                    //Agregar generos
+                    $vj->generos()->sync($generos);
+                }
+                $plataformas = $request->input('plataforma_id');
+                //Solo es necesario con la imagen
+                if (!is_array($request->input('plataforma_id'))) {
+                    //Formato array relación muchos a muchos
+                    $plataformas =
+                        explode(',', $request->input('plataforma_id'));
+                }
+
+                if (!is_array($request->input('plataforma_id'))) {
+                    //Formato array relación muchos a muchos
+                    $plataformas =
+                        explode(',', $request->input('plataforma_id'));
+                }
+                if (!is_null($request->input('plataforma_id'))) {
+                    //Agregar generos
+                    $vj->plataformas()->sync($plataformas);
+                }
+                //Imagenes
+
+                Imagen_Videojuego::where('videojuego_id', '=', $vj->id)->delete();
+                //Imagen_VideojuegoDB::delete('delete imagen_videojuegos where videojuego_id = ?', [$vj->id]);
+                $images = $request->input('imagenes');
+                if (!is_array($request->input('imagenes'))) {
+                    $images =
+                        explode(',', $request->input('imagenes'));
+                }
+                if (!is_array($request->input('imagenes'))) {
+                    $images =
+                        explode(',', $request->input('imagenes'));
+                }
+                if (!is_null($request->input('imagenes'))) {
+
+                    foreach ($images as $image) {
+                        $Imagen = new Imagen_Videojuego();
+                        $Imagen->videojuego_id = $vj->id;
+
+                        $Imagen->pathImagen = $image;
+                        $Imagen->save();
+                    }
+                }
+
+                $response = 'Videojuego creado!';
+                return response()->json($response, 201);
+            } else {
+                $response = [
+                    'msg' => 'Error durante la creación'
+                ];
+                return response()->json($response, 404);
+            }
+
+            //$Imagenes = new Imagen_Videojuego();
+
+
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
