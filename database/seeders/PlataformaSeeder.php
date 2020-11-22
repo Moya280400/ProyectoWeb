@@ -13,15 +13,15 @@ class PlataformaSeeder extends Seeder
      */
     public function run()
     {
-        //1 PlayStation
+        //1 Gamecube
         $Plataforma = new \App\Models\Plataforma();
-        $Plataforma->descripcion = 'PlayStation';
+        $Plataforma->descripcion = 'Gamecube';
         $Plataforma->pathIcono = null;
         $Plataforma->save();
 
-        //2 PlayStation 1
+        //2 PlayStation
         $Plataforma = new \App\Models\Plataforma();
-        $Plataforma->descripcion = 'PlayStation 1';
+        $Plataforma->descripcion = 'PlayStation';
         $Plataforma->pathIcono = null;
         $Plataforma->save();
 

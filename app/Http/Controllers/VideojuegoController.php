@@ -249,8 +249,7 @@ class VideojuegoController extends Controller
         }
         try {
             //Instancia
-            $vj = Videojuego::where('id',$id)->first();;
-            $vj->id = $request->input('id');
+            $vj = Videojuego::where('id',$id)->first();
             $vj->nombre = $request->input('nombre');
             $vj->descripcion = $request->input('descripcion');
             $vj->fechaSalida = Carbon::parse($request->input('fechaSalida'))->format('Y-m-d');
@@ -337,7 +336,7 @@ class VideojuegoController extends Controller
                     }
                 }
 
-                $response = 'Videojuego creado!';
+                $response = 'Videojuego actualizado!';
                 return response()->json($response, 201);
             } else {
                 $response = [
