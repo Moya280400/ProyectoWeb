@@ -86,6 +86,7 @@ class ClienteController extends Controller
     public function show($id)
     {
         try {
+            //as
             $Cliente = Cliente::where('id', $id)->first();
             $response = $Cliente;
             return response()->json($response, 200);
