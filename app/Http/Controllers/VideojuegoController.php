@@ -256,19 +256,11 @@ class VideojuegoController extends Controller
             $vj->precio = $request->input('precio');
             $vj->pathCover = $request->input('pathCover');
             $vj->pathVideo = $request->input('pathVideo');
-
+            $vj->estado = $request->input('estado');
             $vj->desarrollador_id = $request->input('desarrollador_id');
             $vj->distribuidor_id = $request->input('distribuidor_id');
             //Guardar el videojuego en la BD
 
-
-            $date = Carbon::parse($request->input('fechaSalida'));
-            $now = Carbon::now();
-            if ($date > $now) {
-                $vj->estado = 0;
-            } else {
-                $vj->estado = 1;
-            }
 
             if ($vj->update()) {
                 /*

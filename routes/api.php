@@ -44,15 +44,15 @@ Route::group(['prefix' => 'proyectowb'], function () {
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
         Route::get('/{id}', [VideojuegoController::class, 'show']);
         Route::get('nombre/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);
-        Route::post('store', [VideojuegoController::class, 'store']);
-        Route::patch('update/{id}',[VideojuegoController::class, 'update']);
+        Route::post('store', [VideojuegoController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}',[VideojuegoController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
         //
 
     });
     //Rutas auth
     Route::group(['prefix' => 'auth'], function ($router) {
         Route::post('login', [AuthController::class, 'login']);
-        Route::post('register', [AuthController::class, 'register']);
+        Route::post('register', [AuthController::class, 'register'])->middleware(['auth:api', 'scopes:Administrador']);
         Route::post('logout', [AuthController::class, 'logout']);
     });
     //API Roles//
@@ -67,8 +67,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [PlataformaController::class, 'index']);
         Route::get('/{id}', [PlataformaController::class, 'show']);
-        Route::post('store', [PlataformaController::class, 'store']);
-        Route::patch('update/{id}',[PlataformaController::class, 'update']);
+        Route::post('store', [PlataformaController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}',[PlataformaController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
 
     });
     //
@@ -76,8 +76,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
     Route::group(['prefix' => 'genero'], function () {
         Route::get('', [GeneroController::class, 'index']);
         Route::get('/{id}', [GeneroController::class, 'show']);
-        Route::post('store', [GeneroController::class, 'store']);
-        Route::patch('update/{id}', [GeneroController::class, 'update']);
+        Route::post('store', [GeneroController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}', [GeneroController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
 
     });
     //
@@ -86,8 +86,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [DistribuidorController::class, 'index']);
         Route::get('/{id}', [DistribuidorController::class, 'show']);
-        Route::post('store', [DistribuidorController::class, 'store']);
-        Route::patch('update/{id}',[DistribuidorController::class, 'update']);
+        Route::post('store', [DistribuidorController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}',[DistribuidorController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
 
     });
     //
@@ -96,8 +96,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [DesarrolladorController::class, 'index']);
         Route::get('/{id}', [DesarrolladorController::class, 'show']);
-        Route::post('store', [DesarrolladorController::class, 'store']);
-        Route::patch('update/{id}',[DesarrolladorController::class, 'update']);
+        Route::post('store', [DesarrolladorController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}',[DesarrolladorController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
 
     });
     //
@@ -106,8 +106,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [MarcaVehiculoController::class, 'index']);
         Route::get('/{id}', [MarcaVehiculoController::class, 'show']);
-        Route::post('store', [MarcaVehiculoController::class, 'store']);
-        Route::patch('update/{id}', [MarcaVehiculoController::class, 'update']);
+        Route::post('store', [MarcaVehiculoController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}', [MarcaVehiculoController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
 
     });
      //
@@ -132,8 +132,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [VehiculoController::class, 'index']);
         Route::get('/{id}', [VehiculoController::class, 'show']);
-        Route::post('store', [VehiculoController::class, 'store']);
-        Route::patch('update/{id}', [VehiculoController::class, 'update']);
+        Route::post('store', [VehiculoController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}', [VehiculoController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
 
     });
      //
@@ -142,9 +142,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [ClienteController::class, 'index']);
         Route::get('/{id}', [ClienteController::class, 'show']);
-        Route::post('store', [ClienteController::class, 'store']);
-        Route::patch('update/{id}',[ClienteController::class, 'update']
-        );
+        Route::post('store', [ClienteController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}',[ClienteController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
     });
      //
     //API repartidor//
@@ -152,8 +151,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
 
         Route::get('', [RepartidorController::class, 'index']);
         Route::get('/{id}', [RepartidorController::class, 'show']);
-        Route::post('store', [RepartidorController::class, 'store']);
-        Route::patch('update/{id}',[RepartidorController::class, 'update']);
+        Route::post('store', [RepartidorController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::patch('update/{id}',[RepartidorController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);
     });
     //
     //API Usuario//
@@ -168,8 +167,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
     Route::group(['prefix' => 'pedido'], function () {
 
         Route::get('', [PedidoController::class, 'index']);
-        Route::get('/{id}', [PedidoController::class, 'show']);
-        Route::post('store', [PedidoController::class, 'store']);
+        Route::get('/{id}', [PedidoController::class, 'show'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::post('store', [PedidoController::class, 'store'])->middleware(['auth:api', 'scopes:Vendedor']);
     });
     //
 
