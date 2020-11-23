@@ -29,7 +29,7 @@ class VideojuegoController extends Controller
     public function getVideojuegoActivo()
     {
         try {
-            $videojuegos = Videojuego::where('estado', 1)->with(['generos', 'plataformas'])->orderBy('nombre', 'asc')->get();
+            $videojuegos = Videojuego::where('estado', 1)->with(['generos', 'plataformas'])->orderBy('fechaSalida', 'desc')->get();
             $response = $videojuegos;
             return response()->json($response, 200);
         } catch (\Exception $e) {
