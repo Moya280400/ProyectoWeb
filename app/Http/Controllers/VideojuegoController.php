@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Imagen_Videojuego;
+use App\Models\Plataforma;
 use App\Models\Videojuego;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -206,6 +207,58 @@ class VideojuegoController extends Controller
         }
     }
 
+    public function filtradoGenero(Request $request)
+    {
+        try {
+            $generos = $request->input('filtro_id');
+            if (!is_array($request->input('filtro_id'))) {
+                $generos  =
+                    explode(',', $request->input('filtro_id'));
+            }
+            if (!is_array($request->input('filtro_id'))) {
+                $generos  =
+                    explode(',', $request->input('filtro_id'));
+            }
+            if (!is_null($request->input('filtro_id'))) {
+
+            //Listar los videojuegos
+            $videojuegos = Videojuego::whereHas('generos', function ($query) use ($generos) {
+                $query->whereIn('genero_id', [$generos]);
+            })->get();
+            $response = $videojuegos;
+                return response()->json($response, 200);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    public function filtradoPlataforma(Request $request)
+    {
+        try {
+            $plataformas = $request->input('filtro_id');
+            if (!is_array($request->input('filtro_id'))) {
+                $plataformas =
+                    explode(',', $request->input('filtro_id'));
+            }
+            if (!is_array($request->input('filtro_id'))) {
+                $plataformas =
+                    explode(',', $request->input('filtro_id'));
+            }
+            if (!is_null($request->input('filtro_id'))) {
+
+                $videojuegos = Videojuego::whereHas('plataformas', function ($query) use ($plataformas) {
+                    $query->whereIn('plataforma_id', [$plataformas]);
+                })->get();
+                $response = $videojuegos;
+                return response()->json($response, 200);
+            }
+            //Listar los videojuegos
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
