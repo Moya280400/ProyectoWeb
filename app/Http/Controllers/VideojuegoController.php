@@ -255,6 +255,7 @@ class VideojuegoController extends Controller
                 return response()->json($response, 200);
             }
             //Listar los videojuegos
+
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 422);
         }
