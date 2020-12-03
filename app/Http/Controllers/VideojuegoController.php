@@ -219,16 +219,15 @@ class VideojuegoController extends Controller
                 $generos  =
                     explode(',', $request->input('filtro_id'));
             }
-            if (!is_null($request->input('filtro_id'))) {
+            if (!empty($request->input('filtro_id'))) {
 
-            //Listar los videojuegos
-            $videojuegos = Videojuego::whereHas('generos', function ($query) use ($generos) {
-                $query->whereIn('genero_id', [$generos]);
-            })->get();
-            $response = $videojuegos;
+                //Listar los videojuegos
+                $videojuegos = Videojuego::where('estado', 1)->whereHas('generos', function ($query) use ($generos) {
+                    $query->whereIn('genero_id', [$generos]);
+                })->get();
+                $response = $videojuegos;
                 return response()->json($response, 200);
             }
-
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 422);
         }
@@ -246,16 +245,15 @@ class VideojuegoController extends Controller
                 $plataformas =
                     explode(',', $request->input('filtro_id'));
             }
-            if (!is_null($request->input('filtro_id'))) {
+            if (!empty($request->input('filtro_id'))) {
 
-                $videojuegos = Videojuego::whereHas('plataformas', function ($query) use ($plataformas) {
+                $videojuegos = Videojuego::where('estado', 1)->whereHas('plataformas', function ($query) use ($plataformas) {
                     $query->whereIn('plataforma_id', [$plataformas]);
                 })->get();
                 $response = $videojuegos;
                 return response()->json($response, 200);
             }
             //Listar los videojuegos
-
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 422);
         }
@@ -303,7 +301,7 @@ class VideojuegoController extends Controller
         }
         try {
             //Instancia
-            $vj = Videojuego::where('id',$id)->first();
+            $vj = Videojuego::where('id', $id)->first();
             $vj->nombre = $request->input('nombre');
             $vj->descripcion = $request->input('descripcion');
             $vj->fechaSalida = Carbon::parse($request->input('fechaSalida'))->format('Y-m-d');
