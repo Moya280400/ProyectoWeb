@@ -51,25 +51,6 @@ class PedidoController extends Controller
          */
         //Especificar las reglas de validación para los campos del videojuego
         //https://laravel.com/docs/8.x/validation#available-validation-rules
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'fecha' => 'required|date',
-                'direccion_entrega' => 'required|string',
-                'subtotal' => 'required|string',
-                'costo_envio' => 'required|string',
-                'impuesto' => 'required|string',
-                'total' => 'required|string',
-                'estado' => 'required|string',
-                'cliente_id' => 'required|string',
-                'usuario_id' => 'required|string',
-                'repartidor_id' => 'required|string',
-                'tipo_entrega_id' => 'required|string',
-            ]
-        );
-        if ($validator->fails()) {
-            return response()->json($validator->messages(), 422);
-        }
         try {
             //Instancia
             $pedido = new Pedido();
