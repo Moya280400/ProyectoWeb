@@ -27,13 +27,14 @@ class CreatePedidosTable extends Migration
             $table->Unsignedinteger('usuario_id');
             $table->string('repartidor_id',200)->nullable();
             $table->Unsignedinteger('tipo_entrega_id');
-
+            $table->Unsignedinteger('estado_pedido_id');
 
             $table->timestamps();
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->foreign('repartidor_id')->references('id')->on('repartidors');
             $table->foreign('tipo_entrega_id')->references('id')->on('tipo_entregas');
+            $table->foreign('estado_pedido_id')->references('id')->on('estado_pedidos');
         });
     }
 

@@ -40,6 +40,7 @@ return array(
     'App\\Models\\Cliente' => $baseDir . '/app/Models/Cliente.php',
     'App\\Models\\Desarrollador' => $baseDir . '/app/Models/Desarrollador.php',
     'App\\Models\\Distribuidor' => $baseDir . '/app/Models/Distribuidor.php',
+    'App\\Models\\Estado_Pedido' => $baseDir . '/app/Models/Estado_Pedido.php',
     'App\\Models\\Factura' => $baseDir . '/app/Models/Factura.php',
     'App\\Models\\Genero' => $baseDir . '/app/Models/Genero.php',
     'App\\Models\\Imagen_Videojuego' => $baseDir . '/app/Models/Imagen_Videojuego.php',

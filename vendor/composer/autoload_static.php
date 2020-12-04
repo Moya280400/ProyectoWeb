@@ -619,6 +619,7 @@ class ComposerStaticInit6a724a52c8050de84776ec2e4fc495e4
         'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
         'App\\Models\\Desarrollador' => __DIR__ . '/../..' . '/app/Models/Desarrollador.php',
         'App\\Models\\Distribuidor' => __DIR__ . '/../..' . '/app/Models/Distribuidor.php',
+        'App\\Models\\Estado_Pedido' => __DIR__ . '/../..' . '/app/Models/Estado_Pedido.php',
         'App\\Models\\Factura' => __DIR__ . '/../..' . '/app/Models/Factura.php',
         'App\\Models\\Genero' => __DIR__ . '/../..' . '/app/Models/Genero.php',
         'App\\Models\\Imagen_Videojuego' => __DIR__ . '/../..' . '/app/Models/Imagen_Videojuego.php',

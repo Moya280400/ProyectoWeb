@@ -26,6 +26,7 @@ class PedidoSeeder extends Seeder
         $Pedido->usuario_id = '2';
         $Pedido->repartidor_id = '128745632';
         $Pedido->tipo_entrega_id = '1';
+        $Pedido->estado_pedido_id = '1';
         $Pedido->save();
 
          //Primer  detalle pedido
@@ -49,6 +50,7 @@ class PedidoSeeder extends Seeder
         $Pedido->usuario_id = '3';
         $Pedido->repartidor_id = null;
         $Pedido->tipo_entrega_id = '2';
+        $Pedido->estado_pedido_id = '1';
         $Pedido->save();
 
          //Primer detalle pedido 2
@@ -81,6 +83,7 @@ class PedidoSeeder extends Seeder
         $Pedido->usuario_id = '3';
         $Pedido->repartidor_id = '127745632';
         $Pedido->tipo_entrega_id = '1';
+        $Pedido->estado_pedido_id = '1';
         $Pedido->save();
 
          //Primer  detalle pedido 3
@@ -104,6 +107,7 @@ class PedidoSeeder extends Seeder
         $Pedido->usuario_id = '4';
         $Pedido->repartidor_id = '121246980';
         $Pedido->tipo_entrega_id = '1';
+        $Pedido->estado_pedido_id = '1';
         $Pedido->save();
 
          //Primer detalle pedido 4
@@ -127,6 +131,7 @@ class PedidoSeeder extends Seeder
         $Pedido->usuario_id = '2';
         $Pedido->repartidor_id = '128112386';
         $Pedido->tipo_entrega_id = '1';
+         $Pedido->estado_pedido_id = '1';
         $Pedido->save();
 
          //Primer  detalle pedido 5
