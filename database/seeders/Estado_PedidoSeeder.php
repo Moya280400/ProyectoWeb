@@ -15,7 +15,7 @@ class Estado_PedidoSeeder extends Seeder
     {
          //Preparando
          $Estado = new \App\Models\Estado_Pedido();
-         $Estado->descripcion = 'Preparando';
+         $Estado->descripcion = 'Pendiente';
          $Estado->save();
 
          //Preparado
@@ -24,11 +24,6 @@ class Estado_PedidoSeeder extends Seeder
          $Estado->save();
 
          //En camino
-         $Estado = new \App\Models\Estado_Pedido();
-         $Estado->descripcion = 'En Camino';
-         $Estado->save();
-
-         //Entregado
          $Estado = new \App\Models\Estado_Pedido();
          $Estado->descripcion = 'Entregado';
          $Estado->save();

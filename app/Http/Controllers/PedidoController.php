@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Factura;
 use App\Models\Pedido;
 use App\Models\Pedido_Videojuego;
 use App\Models\Videojuego;
@@ -20,7 +21,19 @@ class PedidoController extends Controller
     public function index()
     {
         try {
-            $Pedido = Pedido::orderBy('fecha', 'asc')->with(['tipo_entrega'])->get();
+            $Pedido = Pedido::orderBy('fecha', 'asc')->with(['tipo_entrega','estado_pedido'])->get();
+            $response = $Pedido;
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+        }
+    }
+
+    public function PedidoPreparadoRepartidor($id)
+    {
+        try {
+            $Pedido = Pedido::orderBy('fecha', 'asc')->with(['tipo_entrega','estado_pedido'])
+            ->where('estado_pedido_id',2)->where()->get('repartidor_id',$id);
             $response = $Pedido;
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -60,7 +73,7 @@ class PedidoController extends Controller
             $pedido->costo_envio = $request->input('costo_envio');
             $pedido->impuesto = $request->input('impuesto');
             $pedido->total = $request->input('total');
-            $pedido->estado = 1;
+            $pedido->estado_pedido_id = 1;
 
             $pedido->cliente_id = $request->input('cliente_id');
             $pedido->usuario_id = $request->input('usuario_id');
@@ -138,7 +151,7 @@ class PedidoController extends Controller
     public function show($id)
     {
         try {
-            $Pedido = Pedido::where('id', $id)->with(['cliente', 'usuario', 'repartidor', 'tipo_entrega', 'pedido_Videojuegos.videojuego'])->first();
+            $Pedido = Pedido::where('id', $id)->with(['cliente', 'usuario', 'repartidor', 'tipo_entrega','estado_pedido' ,'pedido_Videojuegos.videojuego'])->first();
             $response = $Pedido;
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -164,9 +177,61 @@ class PedidoController extends Controller
      * @param  \App\Models\pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pedido $pedido)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'estado_pedido_id' => 'required|string',
+            'id' => 'required',
+        ]);
+        //Retornar mensajes de validación
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+
+        //Datos del marca
+        $pedido = Pedido::find($request->input('id'));
+        $pedido->estado_pedido_id = $request->input('estado_pedido_id');
+
+
+        //Actualizar videojuego
+        if ($pedido->update()) {
+
+            if($request->input('estado_pedido_id')==2){
+                $response = 'Pedido actualizado con exito!';
+                return response()->json($response, 200);
+            }
+            else{
+                try {
+                    if($request->input('estado_pedido_id')==3){
+                        $factura = new Factura();
+                        $now = Carbon::now();
+                        $factura->fecha_emision=$now;
+                        $factura->subtotal=$pedido->subtotal;
+                        $factura->impuesto=$pedido->impuesto;
+                        $factura->total=$pedido->total;
+                        $factura->pedido_id=$pedido->id;
+                        $factura->usuario_id=$pedido->usuario_id;
+
+                        if ($factura->save()) {
+                            $response = 'Pedido actulizado y factura creada con exito!';
+                            return response()->json($response, 201);
+                        } else {
+                            $response = [
+                                'msg' => 'Error durante la creación'
+                            ];
+                            return response()->json($response, 404);
+                        }
+                    }
+                }catch (\Exeption $e) {
+                        return response()->json($e->getMessage(), 422);
+                }
+            }
+        }
+        $response = [
+            'msg' => 'Error durante la actualización'
+        ];
+
+        return response()->json($response, 404);
     }
 
     /**

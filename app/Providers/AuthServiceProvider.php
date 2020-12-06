@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'Administrador' => 'Descripción permisos administrador',
             'Vendedor' => 'Descripción permisos vendedor',
-            'Despachador' => 'Descripción permisos despachador'
+            'Bodeguero' => 'Descripción permisos bodeguero'
         ]);
 
         Passport::setDefaultScope([

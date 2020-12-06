@@ -23,6 +23,10 @@ class Pedido extends Model
     {
         return $this->belongsTo('App\Models\Tipo_Entrega');
     }
+    public function estado_pedido()
+    {
+        return $this->belongsTo('App\Models\Estado_Pedido');
+    }
     //Unión con pedido_repartidor
     public function repartidor()
     {

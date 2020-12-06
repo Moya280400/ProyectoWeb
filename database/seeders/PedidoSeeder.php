@@ -21,7 +21,6 @@ class PedidoSeeder extends Seeder
         $Pedido->costo_envio = '1000';
         $Pedido->impuesto = '3380';
         $Pedido->total = '29380';
-        $Pedido->estado = '1';
         $Pedido->cliente_id = '154674289';
         $Pedido->usuario_id = '2';
         $Pedido->repartidor_id = '128745632';
@@ -45,7 +44,6 @@ class PedidoSeeder extends Seeder
         $Pedido->costo_envio = '0';
         $Pedido->impuesto = '7930';
         $Pedido->total = '68930';
-        $Pedido->estado = '1';
         $Pedido->cliente_id = '291611289';
         $Pedido->usuario_id = '3';
         $Pedido->repartidor_id = null;
@@ -78,12 +76,11 @@ class PedidoSeeder extends Seeder
         $Pedido->costo_envio = '1000';
         $Pedido->impuesto = '1430';
         $Pedido->total = '12430';
-        $Pedido->estado = '1';
         $Pedido->cliente_id = '289742294';
         $Pedido->usuario_id = '3';
         $Pedido->repartidor_id = '127745632';
         $Pedido->tipo_entrega_id = '1';
-        $Pedido->estado_pedido_id = '1';
+        $Pedido->estado_pedido_id = '2';
         $Pedido->save();
 
          //Primer  detalle pedido 3
@@ -102,12 +99,11 @@ class PedidoSeeder extends Seeder
         $Pedido->costo_envio = '1000';
         $Pedido->impuesto = '3380';
         $Pedido->total = '29380';
-        $Pedido->estado = '1';
         $Pedido->cliente_id = '488043056';
         $Pedido->usuario_id = '4';
         $Pedido->repartidor_id = '121246980';
         $Pedido->tipo_entrega_id = '1';
-        $Pedido->estado_pedido_id = '1';
+        $Pedido->estado_pedido_id = '3';
         $Pedido->save();
 
          //Primer detalle pedido 4
@@ -120,18 +116,17 @@ class PedidoSeeder extends Seeder
 
         //Quinto pedido
         $Pedido = new \App\Models\Pedido();
-        $Pedido->fecha = '2020-10-20';
+        $Pedido->fecha = '2020-10-29';
         $Pedido->direccion_entrega = 'Naranjo Centro, Naranjo';
         $Pedido->subtotal = '36000';
         $Pedido->costo_envio = '1000';
         $Pedido->impuesto = '4810';
         $Pedido->total = '40810';
-        $Pedido->estado = '1';
         $Pedido->cliente_id = '488043070';
         $Pedido->usuario_id = '2';
         $Pedido->repartidor_id = '128112386';
         $Pedido->tipo_entrega_id = '1';
-         $Pedido->estado_pedido_id = '1';
+        $Pedido->estado_pedido_id = '3';
         $Pedido->save();
 
          //Primer  detalle pedido 5

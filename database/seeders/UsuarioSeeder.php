@@ -27,7 +27,7 @@ class UsuarioSeeder extends Seeder
         //Vendedor 2
         $objetoUsuario = \App\Models\Usuario::create([
             'nombre' => 'Peter Parker',
-            'email' => 'peterparker@gmail.com',
+            'email' => 'vendedor@gmail.com',
             'telefono' => '86675665',
             'estado' => '1',
             'password' => bcrypt('123456789'),
@@ -65,6 +65,17 @@ class UsuarioSeeder extends Seeder
             'estado' => '1',
             'password' => bcrypt('123456789'),
             'rol_id' => 2
+        ]);
+        $objetoUsuario->save();
+
+        //Bodeguero
+        $objetoUsuario = \App\Models\Usuario::create([
+            'nombre' => 'Victor Volkov',
+            'email' => 'bodeguero@gmail.com',
+            'telefono' => '85433765',
+            'estado' => '1',
+            'password' => bcrypt('123456789'),
+            'rol_id' => 3
         ]);
         $objetoUsuario->save();
 

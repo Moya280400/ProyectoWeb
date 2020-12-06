@@ -16,7 +16,10 @@ use App\Http\Controllers\TipoVehiculoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\VideojuegoController;
+use App\Http\Controllers\EstadoPedidoController;
+use App\Http\Controllers\FacturaController;
 use App\Models\Cliente;
+use App\Models\Estado_Pedido;
 use App\Models\Genero;
 use App\Models\Marca_vehiculo;
 use App\Models\Videojuego;
@@ -170,15 +173,29 @@ Route::group(['prefix' => 'proyectowb'], function () {
     //API Pedido//
     Route::group(['prefix' => 'pedido'], function () {
 
-        Route::get('', [PedidoController::class, 'index']);
-        Route::get('/{id}', [PedidoController::class, 'show'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::get('', [PedidoController::class, 'index'])->middleware(['auth:api', 'scope:Administrador,Bodeguero']);
+        Route::get('/{id}', [PedidoController::class, 'show'])->middleware(['auth:api', 'scope:Administrador,Bodeguero']);
         Route::post('store', [PedidoController::class, 'store'])->middleware(['auth:api', 'scopes:Vendedor']);
+        Route::patch('update/{id}', [PedidoController::class, 'update'])->middleware(['auth:api', 'scopes:Bodeguero']);
+        Route::get('/PedidoRepartidor/{id}', [PedidoController::class, 'PedidoPreparadoRepartidor'])->middleware(['auth:api', 'scopes:Bodeguero']);
+    });
+    //API EstadoPedido//
+    Route::group(['prefix' => 'estado_pedido'], function () {
+
+        Route::get('', [EstadoPedidoController::class, 'index'])->middleware(['auth:api', 'scopes:Bodeguero']);;
     });
     //
 
     Route::group(['prefix' => 'imagen_videojuego'], function () {
 
         Route::get('', [ImagenVideojuegoController::class, 'index']);
+
+    });
+
+    Route::group(['prefix' => 'factura'], function () {
+
+        Route::get('', [FacturaController::class, 'index'])->middleware(['auth:api', 'scopes:Administrador']);;
+        Route::get('/{id}', [FacturaController::class, 'show'])->middleware(['auth:api', 'scopes:Administrador']);;
 
     });
     //

@@ -21,7 +21,6 @@ class CreatePedidosTable extends Migration
             $table->decimal('costo_envio',8,2);
             $table->decimal('impuesto',8,2);
             $table->decimal('total',8,2);
-            $table->boolean('estado')->default(true);
             //foreing key
             $table->string('cliente_id',200);
             $table->Unsignedinteger('usuario_id');
@@ -50,6 +49,7 @@ class CreatePedidosTable extends Migration
             $table->dropForeign('pedidos_usuario_id_foreign');
             $table->dropForeign('pedidos_repartidor_id_foreign');
             $table->dropForeign('pedidos_tipo_entrega_id_foreign');
+            $table->dropForeign('pedidos_estado_pedido_id_foreign');
         });
         Schema::dropIfExists('pedidos');
     }

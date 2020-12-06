@@ -14,7 +14,13 @@ class EstadoPedidoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Estado_Pedido = Estado_Pedido::all();
+            $response = $Estado_Pedido;
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+        }
     }
 
     /**

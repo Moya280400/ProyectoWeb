@@ -25,7 +25,7 @@ class RolSeeder extends Seeder
 
                 //Facturador
                 $Rol = new \App\Models\Rol();
-                $Rol->descripcion='Facturador';
+                $Rol->descripcion='Bodeguero';
                 $Rol->save();
     }
 }

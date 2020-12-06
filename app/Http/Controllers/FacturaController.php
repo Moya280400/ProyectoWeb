@@ -14,7 +14,13 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Factura = Factura::all();
+            $response = $Factura;
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+        }
     }
 
     /**
@@ -44,9 +50,16 @@ class FacturaController extends Controller
      * @param  \App\Models\Factura  $Factura
      * @return \Illuminate\Http\Response
      */
-    public function show(Factura $Factura)
+    public function show($id)
     {
-        //
+        try {
+            //as
+            $Factura = Factura::where('id', $id)->with(['pedido.pedido_Videojuegos', 'pedido.cliente','pedido.repartidor'])->first();
+            $response = $Factura;
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+        }
     }
 
     /**
