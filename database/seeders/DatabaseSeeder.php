@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Estado_PedidoSeeder::class);
         $this->call(PedidoSeeder::class);
         $this->call(Imagen_VideojuegoSeeder::class);
+        $this->call(FacturaSeeder::class);
 
     }
 }

@@ -46,8 +46,8 @@ Route::group(['prefix' => 'proyectowb'], function () {
         Route::get('', [VideojuegoController::class, 'getVideojuegoAdmin'])->middleware(['auth:api', 'scopes:Administrador']);
         Route::get('getVideojuegoActivo', [VideojuegoController::class, 'getVideojuegoActivo']);
 
-        Route::post('filtradoGenero', [VideojuegoController::class, 'filtradoGenero'])->middleware(['auth:api', 'scopes:Administrador']);
-        Route::post('filtradoPlataforma', [VideojuegoController::class, 'filtradoPlataforma'])->middleware(['auth:api', 'scopes:Administrador']);
+        Route::post('filtradoGenero', [VideojuegoController::class, 'filtradoGenero']);
+        Route::post('filtradoPlataforma', [VideojuegoController::class, 'filtradoPlataforma']);
 
         Route::get('/{id}', [VideojuegoController::class, 'show']);
         Route::get('nombre/{nombre}', [VideojuegoController::class, 'getJuegoPorNombre']);

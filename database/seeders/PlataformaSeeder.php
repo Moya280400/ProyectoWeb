@@ -22,19 +22,19 @@ class PlataformaSeeder extends Seeder
         //2 PlayStation
         $Plataforma = new \App\Models\Plataforma();
         $Plataforma->descripcion = 'PlayStation';
-        $Plataforma->pathIcono = null;
+        $Plataforma->pathIcono = 'https://i.ibb.co/TwpLQ0G/classic-console-1-1.jpg';
         $Plataforma->save();
 
         //3 PlayStation 2
         $Plataforma = new \App\Models\Plataforma();
         $Plataforma->descripcion = 'PlayStation 2';
-        $Plataforma->pathIcono = null;
+        $Plataforma->pathIcono = 'https://i.ibb.co/f8LzgPx/c021c573a9787c496f7f44d663e89bdb.jpg';
         $Plataforma->save();
 
         //4 PlayStation 3
         $Plataforma = new \App\Models\Plataforma();
         $Plataforma->descripcion = 'PlayStation 3';
-        $Plataforma->pathIcono = null;
+        $Plataforma->pathIcono = 'https://i.ibb.co/0tRzwbw/9fae7ed3be19f7bc069488830e9b96be.jpg';
         $Plataforma->save();
 
         //5 PlayStation 4
@@ -52,13 +52,13 @@ class PlataformaSeeder extends Seeder
         //7 Xbox
         $Plataforma = new \App\Models\Plataforma();
         $Plataforma->descripcion = 'Xbox';
-        $Plataforma->pathIcono = null;
+        $Plataforma->pathIcono = 'https://i.ibb.co/kQNXt21/microsoft-xbox-1024x1024.png';
         $Plataforma->save();
 
         //8 Xbox 360
         $Plataforma = new \App\Models\Plataforma();
         $Plataforma->descripcion = 'Xbox 360';
-        $Plataforma->pathIcono = null;
+        $Plataforma->pathIcono = 'https://i.ibb.co/drRRZ1Y/61yx3u-Rbbn-L-SL1000-600x600.jpg';
         $Plataforma->save();
 
         //9 Xbox One
@@ -76,7 +76,7 @@ class PlataformaSeeder extends Seeder
         //11 Nintendo Wii U
         $Plataforma = new \App\Models\Plataforma();
         $Plataforma->descripcion = 'Nintendo Wii U';
-        $Plataforma->pathIcono = null;
+        $Plataforma->pathIcono = 'https://i.ibb.co/3Srpxn3/1526480760-84.jpg';
         $Plataforma->save();
 
         //12 Nintendo Switch

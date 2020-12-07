@@ -62,7 +62,7 @@ class PedidoSeeder extends Seeder
         //Segundo detalle pedido 2
         $PedidoDetalle = new \App\Models\Pedido_Videojuego();
         $PedidoDetalle->pedido_id = '2';
-        $PedidoDetalle->videojuego_id = '3423146643';
+        $PedidoDetalle->videojuego_id = '6667311649';
         $PedidoDetalle->cantidad = '1';
         $PedidoDetalle->total = '36000';
         $PedidoDetalle->save();
@@ -80,7 +80,7 @@ class PedidoSeeder extends Seeder
         $Pedido->usuario_id = '3';
         $Pedido->repartidor_id = '127745632';
         $Pedido->tipo_entrega_id = '1';
-        $Pedido->estado_pedido_id = '2';
+        $Pedido->estado_pedido_id = '3';
         $Pedido->save();
 
          //Primer  detalle pedido 3
