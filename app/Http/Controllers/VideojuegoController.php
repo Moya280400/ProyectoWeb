@@ -211,19 +211,14 @@ class VideojuegoController extends Controller
     {
         try {
             $generos = $request->input('filtro_id');
-            if (!is_array($request->input('filtro_id'))) {
-                $generos  =
-                    explode(',', $request->input('filtro_id'));
-            }
-            if (!is_array($request->input('filtro_id'))) {
-                $generos  =
-                    explode(',', $request->input('filtro_id'));
-            }
+            $generosString =
+                array_map('intval', $generos);
+
             if (!empty($request->input('filtro_id'))) {
 
                 //Listar los videojuegos
-                $videojuegos = Videojuego::where('estado', 1)->whereHas('generos', function ($query) use ($generos) {
-                    $query->whereIn('genero_id', [$generos]);
+                $videojuegos = Videojuego::where('estado', 1)->whereHas('generos', function ($query) use ($generosString) {
+                    $query->whereIn('genero_id', [$generosString]);
                 })->get();
                 $response = $videojuegos;
                 return response()->json($response, 200);
@@ -237,19 +232,18 @@ class VideojuegoController extends Controller
     {
         try {
             $plataformas = $request->input('filtro_id');
-            if (!is_array($request->input('filtro_id'))) {
-                $plataformas =
-                    explode(',', $request->input('filtro_id'));
-            }
-            if (!is_array($request->input('filtro_id'))) {
-                $plataformas =
-                    explode(',', $request->input('filtro_id'));
-            }
+
+            $plataformasString =
+                array_map('intval', $plataformas);
+
+
             if (!empty($request->input('filtro_id'))) {
 
-                $videojuegos = Videojuego::where('estado', 1)->whereHas('plataformas', function ($query) use ($plataformas) {
-                    $query->whereIn('plataforma_id', [$plataformas]);
+                $videojuegos = Videojuego::where('estado', 1)->whereHas('plataformas', function ($query) use ($plataformasString) {
+                    $query->whereIn('plataforma_id', $plataformasString);
                 })->get();
+
+
                 $response = $videojuegos;
                 return response()->json($response, 200);
             }
