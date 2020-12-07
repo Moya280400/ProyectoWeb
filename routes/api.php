@@ -157,6 +157,7 @@ Route::group(['prefix' => 'proyectowb'], function () {
     Route::group(['prefix' => 'repartidor'], function () {
 
         Route::get('', [RepartidorController::class, 'index']);
+        Route::get('activos', [RepartidorController::class, 'activos']);
         Route::get('/{id}', [RepartidorController::class, 'show']);
         Route::post('store', [RepartidorController::class, 'store'])->middleware(['auth:api', 'scopes:Administrador']);
         Route::patch('update/{id}',[RepartidorController::class, 'update'])->middleware(['auth:api', 'scopes:Administrador']);

@@ -29,6 +29,23 @@ class RepartidorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function activos()
+    {
+        try {
+            $Repartidor = Repartidor::where('estado',1)->get();
+            $response=$Repartidor;
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),200);
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
